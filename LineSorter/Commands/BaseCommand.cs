@@ -13,7 +13,6 @@ namespace LineSorter.Commands
             get => Command.Text;
             set => ChangeText(value);
         }
-        private string _text { get; set; }
         protected AsyncPackage Package { get; set; }
         protected OleMenuCommand Command { get; set; }
         public static T Instance { get; private set; }
