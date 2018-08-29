@@ -8,8 +8,12 @@
 	void SaveOutput(string OutputFileName)
 	{
 		File.WriteAllText(Path.Combine(Path.GetDirectoryName(Host.TemplateFile), OutputFileName), this.GenerationEnvironment.ToString()); 
-		this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+        Clear();
 	}
+    void Clear()
+    {
+        this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+    }
 
     private class Package
     {

@@ -7,8 +7,7 @@
 <# ContextMenu[] contexts = ContextMenu.Menus; #>
 <# Command[] commands = Command.Commands; #>
 <# Group[] groups = Group.Groups; #>
-<# for (int i = 0; i < langs.Length; i++) { #>
-<?xml version="1.0" encoding="utf-8"?>
+<# for (int i = 0; i < langs.Length; i++) { Clear(); #><?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <Extern href="stdidcmd.h" />
   <Extern href="vsshlids.h" />
@@ -106,6 +105,6 @@
   </Symbols>
 </CommandTable>
 <# 
-	SaveOutput($"..\\CommandTables\\VSPackage.{langs[i].Name}.vscts");
+	SaveOutput($"..\\CommandTables\\VSPackage.{langs[i].Name}.vsct");
 } 
 #>
