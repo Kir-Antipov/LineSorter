@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+
+<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <Extern href="stdidcmd.h" />
   <Extern href="vsshlids.h" />
@@ -15,8 +16,10 @@
 
     <Groups>
       <Group guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0101"></Group>
-      <Group guid="guidVSPackageCmdSet" id="LengthGroup" priority="0x0100"></Group>
-      <Group guid="guidVSPackageCmdSet" id="AlphGroup" priority="0x0FF"></Group>
+      <Group guid="guidVSPackageCmdSet" id="LengthGroup" priority="0x1021"></Group>
+      <Group guid="guidVSPackageCmdSet" id="AlphGroup" priority="0x1022"></Group>
+      <Group guid="guidVSPackageCmdSet" id="RandomGroup" priority="0x1023"></Group>
+      <Group guid="guidVSPackageCmdSet" id="UserGroup" priority="0x1024"></Group>
     </Groups>
     
     <Buttons>
@@ -31,20 +34,22 @@
           <ButtonText>Сортировать линии по длине (уб.)</ButtonText>
         </Strings>
       </Button>
-
-
-      <Button guid="guidVSPackageCmdSet" id="CommandAlphSort" priority="0x0FF" type="Button">
-        <Icon guid="guidImages" id="bmpPicArrows" />        
+      <Button guid="guidVSPackageCmdSet" id="CommandAlphSort" priority="0x0100" type="Button">
+        <Icon guid="guidImages" id="bmpPicArrows" />
         <Strings>
           <ButtonText>Сортировать линии по алфавиту</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidVSPackageCmdSet" id="CommandAlphSortDesc" priority="0x0FF" type="Button">
+      <Button guid="guidVSPackageCmdSet" id="CommandAlphSortDesc" priority="0x0100" type="Button">
         <Strings>
           <ButtonText>Сортировать линии по алфавиту (уб.)</ButtonText>
         </Strings>
       </Button>
-
+      <Button guid="guidVSPackageCmdSet" id="CommandRandomSort" priority="0x0100" type="Button">
+        <Strings>
+          <ButtonText>Перемешать</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
     
     <Bitmaps>
@@ -54,18 +59,32 @@
   </Commands>
 
   <CommandPlacements>
-
     <CommandPlacement guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0600">
       <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0600">
+      <Parent guid="XAML" id="Context" />
     </CommandPlacement>
     <CommandPlacement guid="guidVSPackageCmdSet" id="MainMenu" priority="0x0001">
       <Parent guid="guidVSPackageCmdSet" id="MainGroup" />
     </CommandPlacement>
-    <CommandPlacement guid="guidVSPackageCmdSet" id="AlphGroup" priority="0x0FF">
+    <CommandPlacement guid="guidVSPackageCmdSet" id="LengthGroup" priority="0x1021">
       <Parent guid="guidVSPackageCmdSet" id="MainMenu" />
     </CommandPlacement>
-    <CommandPlacement guid="guidVSPackageCmdSet" id="LengthGroup" priority="0x0100">
+    <CommandPlacement guid="guidVSPackageCmdSet" id="AlphGroup" priority="0x1022">
       <Parent guid="guidVSPackageCmdSet" id="MainMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="RandomGroup" priority="0x1023">
+      <Parent guid="guidVSPackageCmdSet" id="MainMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="UserGroup" priority="0x1024">
+      <Parent guid="guidVSPackageCmdSet" id="MainMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandLengthSort" priority="0x0FF">
+      <Parent guid="guidVSPackageCmdSet" id="LengthGroup" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandLengthSortDesc" priority="0x0FF">
+      <Parent guid="guidVSPackageCmdSet" id="LengthGroup" />
     </CommandPlacement>
     <CommandPlacement guid="guidVSPackageCmdSet" id="CommandAlphSort" priority="0x0FF">
       <Parent guid="guidVSPackageCmdSet" id="AlphGroup" />
@@ -73,11 +92,8 @@
     <CommandPlacement guid="guidVSPackageCmdSet" id="CommandAlphSortDesc" priority="0x0FF">
       <Parent guid="guidVSPackageCmdSet" id="AlphGroup" />
     </CommandPlacement>
-    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandLengthSort" priority="0x0100">
-      <Parent guid="guidVSPackageCmdSet" id="LengthGroup" />
-    </CommandPlacement>
-    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandLengthSortDesc" priority="0x0100">
-      <Parent guid="guidVSPackageCmdSet" id="LengthGroup" />
+    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandRandomSort" priority="0x0FF">
+      <Parent guid="guidVSPackageCmdSet" id="RandomGroup" />
     </CommandPlacement>
   </CommandPlacements>
 
@@ -95,10 +111,14 @@
       <IDSymbol name="MainMenu" value="0x1020" />
       <IDSymbol name="LengthGroup" value="0x1021" />
       <IDSymbol name="AlphGroup" value="0x1022" />
+      <IDSymbol name="RandomGroup" value="0x1023" />
+      <IDSymbol name="UserGroup" value="0x1024" />
       <IDSymbol name="CommandLengthSort" value="0x0100" />
       <IDSymbol name="CommandLengthSortDesc" value="0x0101" />
-      <IDSymbol name="CommandAlphSort" value="0x0102" />     
-      <IDSymbol name="CommandAlphSortDesc" value="0x0103" />     
+      <IDSymbol name="CommandAlphSort" value="0x0102" />
+      <IDSymbol name="CommandAlphSortDesc" value="0x0103" />
+      <IDSymbol name="CommandRandomSort" value="0x0104" />
+   
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{f2b4c3e0-a959-40c0-be9d-315e5ca1615c}">
@@ -109,6 +129,8 @@
       <IDSymbol name="bmpPicArrows" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
-    
+    <GuidSymbol name="XAML" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">
+      <IDSymbol name="Context" value="259"/>
+    </GuidSymbol>
   </Symbols>
 </CommandTable>

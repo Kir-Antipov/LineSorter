@@ -1,0 +1,136 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+    // Save current output to file and clear generation environment
+	void SaveOutput(string OutputFileName)
+	{
+		File.WriteAllText(Path.Combine(Path.GetDirectoryName(Host.TemplateFile), OutputFileName), this.GenerationEnvironment.ToString()); 
+		this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+	}
+
+    private class Package
+    {
+        public string Name { get; }
+
+        public Package(string Name) { this.Name = Name; }
+    }
+
+    private class Group 
+    {
+        public static Group[] Groups { get; } = new Group[] { 
+            new Group("LengthGroup", "0x1021"),
+            new Group("AlphGroup", "0x1022"),
+            new Group("RandomGroup", "0x1023"),
+            new Group("UserGroup", "0x1024")
+        };
+
+        public string ID { get; }
+        public string Name { get; }
+
+        public Group(string Name, string ID) 
+        { 
+            this.Name = Name; 
+            this.ID = ID;
+        }
+
+        public override string ToString() => Name;
+    }
+
+    private class Command
+    {
+        public static Package DefaultPackage { get; } = new Package("LineSorter");
+        public static Command[] Commands { get; } = new Command[] {
+            new Command("CommandLengthSort",        "0x0100", Group.Groups[0], "bmpPicArrows"),
+            new Command("CommandLengthSortDesc",    "0x0101", Group.Groups[0]                ),
+            new Command("CommandAlphSort",          "0x0102", Group.Groups[1], "bmpPicArrows"),
+            new Command("CommandAlphSortDesc",      "0x0103", Group.Groups[1]                ),
+            new Command("CommandRandomSort",        "0x0104", Group.Groups[2]                )
+        };
+
+        public string ID { get; }
+        public string Name { get; }
+        public Group ParentGroup { get; }
+        public string Image { get; }
+        public Package Package { get; }
+
+        public Command(Package Package, string Name, string ID, Group ParentGroup, string Image)
+        {
+            this.ID = ID;
+            this.Name = Name;
+            this.ParentGroup = ParentGroup;
+            this.Image = Image;
+            this.Package = Package;
+        }
+        public Command(string Name, string ID, Group ParentGroup, string Image) : this(DefaultPackage, Name, ID, ParentGroup, Image) { }
+        public Command(string Name, string ID, Group ParentGroup) : this(DefaultPackage, Name, ID, ParentGroup, null) { }
+
+        public override string ToString() { return $"{Package.Name}.{Name}"; }
+    }
+	private class Lang
+	{
+        private static IEnumerable<string> Names { get; } = new List<string> { Command.DefaultPackage.Name }.Concat(Command.Commands.Select(x => x.ToString()));
+		public static Lang[] Langs { get; } = new Lang[] {
+            new Lang("ru-RU",	"Сортировка линий",
+                                "Сортировать линии по длине",
+                                "Сортировать линии по длине (уб.)",
+                                "Сортировать линии по алфавиту",
+                                "Сортировать линии по алфавиту (уб.)",
+                                "Перемешать"),
+		    new Lang("en",		"LineSorter",	
+                                "Sort lines by length",
+                                "Sort lines by length (desc)",
+                                "Sort lines alphabetically",
+                                "Sort lines alphabetically (desc)",
+                                "Shuffle")
+        };
+
+        public string Name { get; }
+		public Dictionary<string, string> Commands { get; }
+
+		public Lang(string Name, Dictionary<string, string> Commands)
+		{
+			this.Name = Name;
+			this.Commands = Commands;
+		}
+		public Lang(string Name, params string[] Commands) : this(Name, CreateCommands(Commands)) { }
+
+        public string this[string CommandName] => Commands[CommandName];
+
+		private static Dictionary<string, string> CreateCommands(string[] Commands)
+		{
+            string[] names = Names.ToArray();
+			Dictionary<string, string> result = new Dictionary<string, string>();
+			if (Commands.Length != names.Length)
+				throw new ArgumentException();
+			for (int i = 0; i < Commands.Length; i++)
+				result.Add(names[i], Commands[i]);
+			return result;
+		}
+	}
+	private class GuidSymbol
+	{
+		public string ID { get; }
+		public string Name { get; }
+		public string Guid { get; }
+
+		public GuidSymbol(string Name, string Guid, string ID)
+		{
+			this.Name = Name;
+			this.Guid = Guid;
+			this.ID = ID;
+		}
+        public GuidSymbol(string Guid, string ID) : this("", Guid, ID) { }
+	}
+    private class ContextMenu : GuidSymbol
+    {
+        public static ContextMenu[] Menus { get; } = new ContextMenu[] {
+            new ContextMenu("XAML", "{4C87B692-1202-46AA-B64C-EF01FAEC53DA}", "259")
+        };
+
+        public ContextMenu(string Name, string Guid, string ID) : base(Name, Guid, ID) { }
+        public ContextMenu(string Guid, string ID) : base(null, Guid, ID) { }
+    }
+ #>
