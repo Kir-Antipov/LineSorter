@@ -42,7 +42,7 @@ namespace LineSorter.Helpers
             IDataObject obj = Clipboard.GetDataObject();
             // Loading text to clipboard:
             Clipboard.SetText(string.Join("\r\n", Selections) + (WasNewLine ? "\r\n" : string.Empty));
-            // Pasting text from clipboard (and formating it):
+            // Pasting text from clipboard (and formatting it):
             dte.ExecuteCommand("Edit.Paste");
             // Now we return everything as it was)
             Clipboard.SetDataObject(obj);
