@@ -22,8 +22,8 @@ namespace LineSorter.Helpers
             Assumes.Present(textManager);
             textManager.GetActiveView2(1, null, (uint)_VIEWFRAMETYPE.vftCodeWindow, out IVsTextView view);
             view.GetSelectedText(out string selectedText);
-            WasNewLine = selectedText.EndsWith(Environment.NewLine);
-            return selectedText.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim(new char[] { ' ', '\t' }));
+            WasNewLine = selectedText.EndsWith("\n");
+            return selectedText.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
         }
         public static IEnumerable<string> GetSelection(IServiceProvider ServiceProvider, out bool WasNewLine)
         {
@@ -41,7 +41,7 @@ namespace LineSorter.Helpers
             // Saving current clipboard state:
             IDataObject obj = Clipboard.GetDataObject();
             // Loading text to clipboard:
-            Clipboard.SetText(string.Join("\r\n", Selections) + (WasNewLine ? "\r\n" : string.Empty));
+            Clipboard.SetText(string.Join(Environment.NewLine, Selections) + (WasNewLine ? Environment.NewLine : string.Empty));
             // Pasting text from clipboard (and formatting it):
             dte.ExecuteCommand("Edit.Paste");
             // Now we return everything as it was)

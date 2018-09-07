@@ -13,12 +13,13 @@ namespace LineSorter.Commands
             get => Command.Text;
             set => ChangeText(value);
         }
-        protected AsyncPackage Package { get; set; }
-        protected OleMenuCommand Command { get; set; }
         public static T Instance { get; private set; }
+        public AsyncPackage Package { get; private set; }
         public static int CommandID { get; internal set; }
         public static Guid CommandSet { get; internal set; }
         protected IServiceProvider ServiceProvider => Package;
+        protected OleMenuCommand Command { get; private set; }
+        protected OleMenuCommandService Service { get; private set; }
         protected IAsyncServiceProvider AsyncServiceProvider => Package;
         #endregion
 
@@ -28,12 +29,17 @@ namespace LineSorter.Commands
             Instance = new T();
             Instance.Init(Package, await Package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService);
         }
+        protected virtual void BeforeInit() { }
         private void Init(AsyncPackage Package, OleMenuCommandService CommandService)
         {
+            BeforeInit();
             this.Package = Package ?? throw new ArgumentNullException(nameof(Package));
+            Service = (CommandService ?? throw new ArgumentNullException(nameof(CommandService)));
             Command = new OleMenuCommand((sender, e) => { ThreadHelper.ThrowIfNotOnUIThread(); Execute((OleMenuCommand)sender); }, new CommandID(CommandSet, CommandID));
-            (CommandService ?? throw new ArgumentNullException(nameof(CommandService))).AddCommand(Command);
+            Service.AddCommand(Command);
+            AfterInit();
         }
+        protected virtual void AfterInit() { }
         #endregion
 
         #region Functions

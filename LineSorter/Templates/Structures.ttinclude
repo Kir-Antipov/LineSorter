@@ -28,17 +28,20 @@
             new Group("LengthGroup", "0x1021"),
             new Group("AlphGroup", "0x1022"),
             new Group("RandomGroup", "0x1023"),
-            new Group("UserGroup", "0x1024")
+            new Group("UserGroup", "0x1024", true)
         };
 
         public string ID { get; }
         public string Name { get; }
+        public bool IsDynamic { get; }
 
-        public Group(string Name, string ID) 
+        public Group(string Name, string ID, bool IsDynamic) 
         { 
-            this.Name = Name; 
             this.ID = ID;
+            this.Name = Name; 
+            this.IsDynamic = IsDynamic;
         }
+        public Group(string Name, string ID) : this(Name, ID, false) { }
 
         public override string ToString() => Name;
     }
@@ -47,11 +50,13 @@
     {
         public static Package DefaultPackage { get; } = new Package("LineSorter");
         public static Command[] Commands { get; } = new Command[] {
-            new Command("CommandLengthSort",        "0x0100", Group.Groups[0], "bmpPicArrows"),
-            new Command("CommandLengthSortDesc",    "0x0101", Group.Groups[0]                ),
-            new Command("CommandAlphSort",          "0x0102", Group.Groups[1], "bmpPicArrows"),
-            new Command("CommandAlphSortDesc",      "0x0103", Group.Groups[1]                ),
-            new Command("CommandRandomSort",        "0x0104", Group.Groups[2]                )
+            new Command("CommandLengthSort",        "0x0100", Group.Groups[0], "bmpPicSortLength"),
+            new Command("CommandLengthSortDesc",    "0x0101", Group.Groups[0]                    ),
+            new Command("CommandAlphSort",          "0x0102", Group.Groups[1], "bmpPicSortAZ"    ),
+            new Command("CommandAlphSortDesc",      "0x0103", Group.Groups[1]                    ),
+            new Command("CommandRandomSort",        "0x0104", Group.Groups[2], "bmpPicShuffle"   ),
+            new Command("CommandUserSort",          "0x0105", Group.Groups[3], "bmpPicAdd"       ),
+            new Command("CommandAnchor",            "0x0106", Group.Groups[3], null        , true)
         };
 
         public string ID { get; }
@@ -59,17 +64,21 @@
         public Group ParentGroup { get; }
         public string Image { get; }
         public Package Package { get; }
+        public bool IsDynamic { get; }
 
-        public Command(Package Package, string Name, string ID, Group ParentGroup, string Image)
+        public Command(Package Package, string Name, string ID, Group ParentGroup, string Image, bool IsDynamic)
         {
             this.ID = ID;
             this.Name = Name;
             this.ParentGroup = ParentGroup;
             this.Image = Image;
             this.Package = Package;
+            this.IsDynamic = IsDynamic;
         }
-        public Command(string Name, string ID, Group ParentGroup, string Image) : this(DefaultPackage, Name, ID, ParentGroup, Image) { }
-        public Command(string Name, string ID, Group ParentGroup) : this(DefaultPackage, Name, ID, ParentGroup, null) { }
+        public Command(Package Package, string Name, string ID, Group ParentGroup, string Image) : this(Package, Name, ID, ParentGroup, Image, false) { }
+        public Command(string Name, string ID, Group ParentGroup, string Image) : this(DefaultPackage, Name, ID, ParentGroup, Image, false) { }
+        public Command(string Name, string ID, Group ParentGroup, string Image, bool IsDynamic) : this(DefaultPackage, Name, ID, ParentGroup, Image, IsDynamic) { }
+        public Command(string Name, string ID, Group ParentGroup) : this(DefaultPackage, Name, ID, ParentGroup, null, false) { }
 
         public override string ToString() { return $"{Package.Name}.{Name}"; }
     }
@@ -82,13 +91,17 @@
                                 "Сортировать линии по длине (уб.)",
                                 "Сортировать линии по алфавиту",
                                 "Сортировать линии по алфавиту (уб.)",
-                                "Перемешать"),
+                                "Перемешать",
+                                "Добавить свой вариант сортировки",
+                                "Якорь"),          
 		    new Lang("en",		"LineSorter",	
                                 "Sort lines by length",
                                 "Sort lines by length (desc)",
                                 "Sort lines alphabetically",
                                 "Sort lines alphabetically (desc)",
-                                "Shuffle")
+                                "Shuffle",
+                                "Add custom sort",
+                                "Anchor")
         };
 
         public string Name { get; }

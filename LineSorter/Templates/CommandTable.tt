@@ -3,11 +3,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<# Lang[] langs = Lang.Langs; #>
-<# ContextMenu[] contexts = ContextMenu.Menus; #>
-<# Command[] commands = Command.Commands; #>
-<# Group[] groups = Group.Groups; #>
-<# for (int i = 0; i < langs.Length; i++) { Clear(); #><?xml version="1.0" encoding="utf-8"?>
+<# for (int i = 0; i < langs.Length; i++) { Clear(); #>
+<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <Extern href="stdidcmd.h" />
   <Extern href="vsshlids.h" />
@@ -16,6 +13,7 @@
     
     <Menus>
       <Menu guid="guidVSPackageCmdSet" id="MainMenu" priority="0x0600" type="Menu">
+      <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText><#= langs[i]["LineSorter"] #></ButtonText>
         </Strings>
@@ -25,14 +23,14 @@
     <Groups>
       <Group guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0101"></Group>
 <# for (int j = 0; j < groups.Length; j++) { #>
-      <Group guid="guidVSPackageCmdSet" id="<#= groups[j].Name #>" priority="<#= groups[j].ID #>"></Group>
+      <Group guid="guidVSPackageCmdSet" id="<#= groups[j].Name #>" priority="<#= groups[j].ID #>"><#= groups[j].IsDynamic ? "<GroupFlag>Dynamic</GroupFlag>" : string.Empty #></Group>
 <# } #>
     </Groups>
     
     <Buttons>
 <# for (int j = 0; j < commands.Length; j++) { #>
       <Button guid="guidVSPackageCmdSet" id="<#= commands[j].Name #>" priority="0x0100" type="Button">
-        <#= string.IsNullOrEmpty(commands[j].Image) ? string.Empty : $"<Icon guid=\"guidImages\" id=\"{commands[j].Image}\" />{Environment.NewLine}        " #><Strings>
+        <#= string.IsNullOrEmpty(commands[j].Image) ? string.Empty : $"<Icon guid=\"guidImages\" id=\"{commands[j].Image}\" />{Environment.NewLine}        " #><#= commands[j].IsDynamic ? $"<CommandFlag>DynamicItemStart</CommandFlag>{Environment.NewLine}        <CommandFlag>DontCache</CommandFlag>{Environment.NewLine}        <CommandFlag>DefaultInvisible</CommandFlag>{Environment.NewLine}        " : string.Empty #><Strings>
           <ButtonText><#= langs[i][commands[j].ToString()] #></ButtonText>
         </Strings>
       </Button>
@@ -40,7 +38,7 @@
     </Buttons>
     
     <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Images\Pictures.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages" href="..\Images\Pictures.png" usedList="bmpPicAdd, bmpPicSortAZ, bmpPicSortZA, bmpPicShuffle, bmpPicSortLength, bmpPicStrikethrough" />
     </Bitmaps>
     
   </Commands>
@@ -83,18 +81,18 @@
       <IDSymbol name="MainMenu" value="0x1020" />
 <# for (int j = 0; j < groups.Length; j++) { #>
       <IDSymbol name="<#= groups[j].Name #>" value="<#= groups[j].ID #>" />
-<# } #>
-<# for (int j = 0; j < commands.Length; j++) { #>
+<# }
+   for (int j = 0; j < commands.Length; j++) { #>
       <IDSymbol name="<#= commands[j].Name #>" value="<#= commands[j].ID #>" />
 <# } #>   
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{f2b4c3e0-a959-40c0-be9d-315e5ca1615c}">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicAdd" value="1" />
+      <IDSymbol name="bmpPicSortAZ" value="2" />
+      <IDSymbol name="bmpPicSortZA" value="3" />
+      <IDSymbol name="bmpPicShuffle" value="4" />
+      <IDSymbol name="bmpPicSortLength" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
 <# for (int j = 0; j < contexts.Length; j++) { #>

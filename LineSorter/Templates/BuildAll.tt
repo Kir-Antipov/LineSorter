@@ -1,6 +1,10 @@
 ﻿<#@ template language="C#" hostspecific="true" #>
 <#@ output extension=".log" #>
 <#@ include file="Structures.ttinclude" #>
+<# Lang[] langs = Lang.Langs; #>
+<# ContextMenu[] contexts = ContextMenu.Menus; #>
+<# Command[] commands = Command.Commands; #>
+<# Group[] groups = Group.Groups; #>
 <#@ include file="CommandTable.tt" #>
 <#@ include file="Resource.tt" #>
 <#@ include file="VSPackage.tt" #>

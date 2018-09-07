@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using LineSorter.Export;
 using LineSorter.Helpers;
 using Microsoft.VisualStudio.Shell;
 
@@ -16,11 +17,8 @@ namespace LineSorter.Commands
         #endregion
 
         #region Functions
-        protected override void Execute(OleMenuCommand Button)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            TextSelection.GetSelection(Package, out bool newLine).OrderBy(x => x.Length).ThenBy(x => x).ReplaceSelection(newLine);
-        }
+        protected override void Execute(OleMenuCommand Button) =>
+            TextSelection.GetSelection(Package, out bool newLine).Select(x => (Row)x).OrderBy(x => x.Cleared.Length).ThenBy(x => x.Cleared).Select(x => (string)x).ReplaceSelection(newLine);
         #endregion
     }
 }

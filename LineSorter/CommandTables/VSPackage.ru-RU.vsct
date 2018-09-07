@@ -7,6 +7,7 @@
     
     <Menus>
       <Menu guid="guidVSPackageCmdSet" id="MainMenu" priority="0x0600" type="Menu">
+      <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
           <ButtonText>Сортировка линий</ButtonText>
         </Strings>
@@ -18,12 +19,12 @@
       <Group guid="guidVSPackageCmdSet" id="LengthGroup" priority="0x1021"></Group>
       <Group guid="guidVSPackageCmdSet" id="AlphGroup" priority="0x1022"></Group>
       <Group guid="guidVSPackageCmdSet" id="RandomGroup" priority="0x1023"></Group>
-      <Group guid="guidVSPackageCmdSet" id="UserGroup" priority="0x1024"></Group>
+      <Group guid="guidVSPackageCmdSet" id="UserGroup" priority="0x1024"><GroupFlag>Dynamic</GroupFlag></Group>
     </Groups>
     
     <Buttons>
       <Button guid="guidVSPackageCmdSet" id="CommandLengthSort" priority="0x0100" type="Button">
-        <Icon guid="guidImages" id="bmpPicArrows" />
+        <Icon guid="guidImages" id="bmpPicSortLength" />
         <Strings>
           <ButtonText>Сортировать линии по длине</ButtonText>
         </Strings>
@@ -34,7 +35,7 @@
         </Strings>
       </Button>
       <Button guid="guidVSPackageCmdSet" id="CommandAlphSort" priority="0x0100" type="Button">
-        <Icon guid="guidImages" id="bmpPicArrows" />
+        <Icon guid="guidImages" id="bmpPicSortAZ" />
         <Strings>
           <ButtonText>Сортировать линии по алфавиту</ButtonText>
         </Strings>
@@ -45,14 +46,29 @@
         </Strings>
       </Button>
       <Button guid="guidVSPackageCmdSet" id="CommandRandomSort" priority="0x0100" type="Button">
+        <Icon guid="guidImages" id="bmpPicShuffle" />
         <Strings>
           <ButtonText>Перемешать</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidVSPackageCmdSet" id="CommandUserSort" priority="0x0100" type="Button">
+        <Icon guid="guidImages" id="bmpPicAdd" />
+        <Strings>
+          <ButtonText>Добавить свой вариант сортировки</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidVSPackageCmdSet" id="CommandAnchor" priority="0x0100" type="Button">
+        <CommandFlag>DynamicItemStart</CommandFlag>
+        <CommandFlag>DontCache</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Якорь</ButtonText>
         </Strings>
       </Button>
     </Buttons>
     
     <Bitmaps>
-      <Bitmap guid="guidImages" href="..\Images\Pictures.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages" href="..\Images\Pictures.png" usedList="bmpPicAdd, bmpPicSortAZ, bmpPicSortZA, bmpPicShuffle, bmpPicSortLength, bmpPicStrikethrough" />
     </Bitmaps>
     
   </Commands>
@@ -94,6 +110,12 @@
     <CommandPlacement guid="guidVSPackageCmdSet" id="CommandRandomSort" priority="0x0FF">
       <Parent guid="guidVSPackageCmdSet" id="RandomGroup" />
     </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandUserSort" priority="0x0FF">
+      <Parent guid="guidVSPackageCmdSet" id="UserGroup" />
+    </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="CommandAnchor" priority="0x0FF">
+      <Parent guid="guidVSPackageCmdSet" id="UserGroup" />
+    </CommandPlacement>
   </CommandPlacements>
 
 
@@ -117,15 +139,17 @@
       <IDSymbol name="CommandAlphSort" value="0x0102" />
       <IDSymbol name="CommandAlphSortDesc" value="0x0103" />
       <IDSymbol name="CommandRandomSort" value="0x0104" />
+      <IDSymbol name="CommandUserSort" value="0x0105" />
+      <IDSymbol name="CommandAnchor" value="0x0106" />
    
     </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{f2b4c3e0-a959-40c0-be9d-315e5ca1615c}">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicAdd" value="1" />
+      <IDSymbol name="bmpPicSortAZ" value="2" />
+      <IDSymbol name="bmpPicSortZA" value="3" />
+      <IDSymbol name="bmpPicShuffle" value="4" />
+      <IDSymbol name="bmpPicSortLength" value="5" />
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>
     <GuidSymbol name="XAML" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">

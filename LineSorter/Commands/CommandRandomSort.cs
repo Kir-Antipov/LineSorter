@@ -21,11 +21,9 @@ namespace LineSorter.Commands
         #endregion
 
         #region Functions
-        protected override void Execute(OleMenuCommand Button)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
+        protected override void Execute(OleMenuCommand Button) =>
             Shuffle(TextSelection.GetSelection(Package, out bool newLine)).ReplaceSelection(newLine);
-        }
+
         private static IEnumerable<T> Shuffle<T>(IEnumerable<T> Source)
         {
             T[] data = Source.ToArray();
