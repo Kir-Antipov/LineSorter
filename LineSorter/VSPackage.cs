@@ -1,21 +1,18 @@
-using EnvDTE;
 using System;
 using System.Threading;
 using LineSorter.Helpers;
 using LineSorter.Commands;
 using Microsoft.VisualStudio;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 using Task = System.Threading.Tasks.Task;
-using Microsoft.VisualStudio.Shell.Interop;
 
 namespace LineSorter
 {
+    [ProvideBindingPath]
     [Guid(PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideBindingPath(SubPath = "UserSort")]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [ProvideOptionPage(typeof(Options.OptionPageGrid), "LineSorter", "General", 0, 0, true, 0)]
@@ -30,6 +27,7 @@ namespace LineSorter
         public static string Path { get; }
         public static SortsLoader Loader { get; }
         public static string DllLocation { get; }
+        public static VSPackage Instance { get; private set; }
         public static Guid Guid { get; } = new Guid(PackageGuidString);
         public const string PackageGuidString = "7fb18e2a-1a51-4dbb-b676-a3514e44823d";
         #endregion
@@ -37,12 +35,10 @@ namespace LineSorter
         #region Init
         static VSPackage()
         {
-            string assemblyPath = new Uri(typeof(VSPackage).Assembly.CodeBase, UriKind.Absolute).LocalPath;
-            int index = assemblyPath.LastIndexOf('\\');
-            if (index == -1)
-                index = assemblyPath.LastIndexOf('/');
-            DllLocation = assemblyPath;
-            Path = assemblyPath.Substring(0, index + 1);
+            DllLocation = new Uri(typeof(VSPackage).Assembly.CodeBase, UriKind.Absolute).LocalPath;
+            Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LineSorter\\");
+            if (!System.IO.Directory.Exists(Path))
+                System.IO.Directory.CreateDirectory(Path);
             Loader = new SortsLoader();
         }
         #endregion
@@ -59,6 +55,8 @@ namespace LineSorter
             await CommandRandomSort.InitializeAsync(this);
             await CommandUserSort.InitializeAsync(this);
             await CommandAnchor.InitializeAsync(this);
+
+            Instance = this;
         }
         #endregion
     }

@@ -55,12 +55,26 @@ namespace LineSorter.Commands.UserSort
             Manager["labelFunc", ru] = "Тип функции:";
             Manager["labelT", en] = "`T` is:";
             Manager["labelT", ru] = "`T` является:";
+            Manager["labelEmpty", en] = "Empty Lines:";
+            Manager["labelEmpty", ru] = "Пустые линии:";
             Manager["labelName", en] = "Name:";
             Manager["labelName", ru] = "Название:";
             Manager["buttCompile", en] = "Compile";
             Manager["buttCompile", ru] = "Компилировать";
             Manager["buttCancel", en] = "Cancel";
             Manager["buttCancel", ru] = "Отмена";
+            Manager["comboFunc.Items.0", en] = "Comparer (Func<T, T, int>)";
+            Manager["comboFunc.Items.0", ru] = "Компаратор (Func<T, T, int>)";
+            Manager["comboFunc.Items.1", en] = "Full implementation (Func<IEnumerable<T>, IEnumerable<T>>)";
+            Manager["comboFunc.Items.1", ru] = "Полная реализация (Func<IEnumerable<T>, IEnumerable<T>>)";
+            Manager["comboLines.Items.0", en] = "Depends on global settings";
+            Manager["comboLines.Items.0", ru] = "Аналогично глобальным настройкам";
+            Manager["comboLines.Items.1", en] = "Remove";
+            Manager["comboLines.Items.1", ru] = "Удалять";
+            Manager["comboLines.Items.2", en] = "As ordinary strings";
+            Manager["comboLines.Items.2", ru] = "Как обычные строки";
+            Manager["comboLines.Items.3", en] = "As mask";
+            Manager["comboLines.Items.3", ru] = "В качестве маски";
             Manager["Error", en] = "Error!";
             Manager["Error", ru] = "Ошибка!";
             Manager["Error.NoName", en] = "Please specify the function name!";
@@ -86,9 +100,10 @@ namespace LineSorter.Commands.UserSort
             comboLang.SelectedIndex = 0;
             comboFunc.SelectedIndex = 0;
             comboType.SelectedIndex = 0;
+            comboLines.SelectedIndex = 0;
             Measure = Graphics.FromImage(new Bitmap(textMain.Width, textMain.MaximumSize.Height));
-            foreach (Control x in new Control[] { this, labelLang, labelFunc, labelT, labelName, buttCompile, buttCancel })
-                x.Text = Manager[x.Name];
+            Manager.Localize(this);
+            
         }
         public FormCreateFunc() : this(string.Empty) { } 
         #endregion
@@ -105,6 +120,7 @@ namespace LineSorter.Commands.UserSort
             bool isCSharp = comboLang.SelectedIndex == 0;
             bool isString = comboType.SelectedIndex == 0;
             bool isCompare = comboFunc.SelectedIndex == 0;
+            string emptyLineAction = ((EmptyLineAction)comboLines.SelectedIndex).ToString();
             string userCode = $"{(isCSharp ? textBefore.Text : (isCompare ? $"{textBefore.Text} Implements IComparer(Of {(isString ? "String" : "Row")}).Compare" : (isString ? ($"{textBefore.Text} Implements IUserSort.Sort") : textBefore.Text)))}{Environment.NewLine}{textMain.Text}{Environment.NewLine}{textAfter.Text}";
             if (isCSharp)
             {
@@ -161,6 +177,7 @@ namespace LineSorter.Commands.UserSort
                     {{
                         public string Guid {{ get {{ return ""{guid}""; }} }}
                         public string Name {{ get {{ return ""{name}""; }} }} 
+                        public EmptyLineAction EmptyLineAction {{ get {{ return EmptyLineAction.{emptyLineAction}; }} }}
                         {userCode}
                         public override string ToString()
                         {{
@@ -181,6 +198,11 @@ namespace LineSorter.Commands.UserSort
                         Public ReadOnly Property Name As String Implements IUserSort.Name
                             Get
                                 Return ""{name}""
+                            End Get
+                        End Property
+                        Public ReadOnly Property EmptyLineAction As EmptyLineAction Implements IUserSort.EmptyLineAction
+                            Get
+                                Return EmptyLineAction.{emptyLineAction}
                             End Get
                         End Property
                         {userCode}

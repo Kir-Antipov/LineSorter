@@ -37,15 +37,20 @@
             this.checkLoadOnInit = new System.Windows.Forms.CheckBox();
             this.groupUserSort = new System.Windows.Forms.GroupBox();
             this.gridSorts = new System.Windows.Forms.DataGridView();
+            this.ColumnGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSort = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.buttUse = new System.Windows.Forms.ToolStripMenuItem();
             this.buttDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColumnGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupLines = new System.Windows.Forms.GroupBox();
+            this.checkRemove = new System.Windows.Forms.RadioButton();
+            this.checkAsLine = new System.Windows.Forms.RadioButton();
+            this.checkAsMask = new System.Windows.Forms.RadioButton();
             this.groupAutoLoad.SuspendLayout();
             this.groupUserSort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSorts)).BeginInit();
             this.gridStrip.SuspendLayout();
+            this.groupLines.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupAutoLoad
@@ -55,7 +60,7 @@
             this.groupAutoLoad.Controls.Add(this.checkLoadOnCreate);
             this.groupAutoLoad.Controls.Add(this.checkLoadOnInit);
             this.groupAutoLoad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupAutoLoad.Location = new System.Drawing.Point(3, 0);
+            this.groupAutoLoad.Location = new System.Drawing.Point(3, 104);
             this.groupAutoLoad.Name = "groupAutoLoad";
             this.groupAutoLoad.Size = new System.Drawing.Size(332, 79);
             this.groupAutoLoad.TabIndex = 5;
@@ -71,7 +76,7 @@
             this.checkLoadOnCreate.TabIndex = 1;
             this.checkLoadOnCreate.Text = "Загружать пользовательские сортировки при создании";
             this.checkLoadOnCreate.UseVisualStyleBackColor = true;
-            this.checkLoadOnCreate.CheckedChanged += new System.EventHandler(this.CheckLoadOnCreate_CheckedChanged);
+            this.checkLoadOnCreate.CheckedChanged += new System.EventHandler(this.StateChanged);
             // 
             // checkLoadOnInit
             // 
@@ -82,14 +87,14 @@
             this.checkLoadOnInit.TabIndex = 0;
             this.checkLoadOnInit.Text = "Загружать пользовательские сортировки при запуске";
             this.checkLoadOnInit.UseVisualStyleBackColor = true;
-            this.checkLoadOnInit.CheckedChanged += new System.EventHandler(this.CheckLoadOnInit_CheckedChanged);
+            this.checkLoadOnInit.CheckedChanged += new System.EventHandler(this.StateChanged);
             // 
             // groupUserSort
             // 
             this.groupUserSort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupUserSort.Controls.Add(this.gridSorts);
-            this.groupUserSort.Location = new System.Drawing.Point(3, 82);
+            this.groupUserSort.Location = new System.Drawing.Point(3, 189);
             this.groupUserSort.Name = "groupUserSort";
             this.groupUserSort.Size = new System.Drawing.Size(332, 64);
             this.groupUserSort.TabIndex = 6;
@@ -151,6 +156,18 @@
             this.gridSorts.Leave += new System.EventHandler(this.GridSorts_Leave);
             this.gridSorts.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GridSorts_MouseDown);
             // 
+            // ColumnGuid
+            // 
+            this.ColumnGuid.HeaderText = "Guid";
+            this.ColumnGuid.Name = "ColumnGuid";
+            this.ColumnGuid.ReadOnly = true;
+            // 
+            // ColumnSort
+            // 
+            this.ColumnSort.HeaderText = "Name";
+            this.ColumnSort.Name = "ColumnSort";
+            this.ColumnSort.ReadOnly = true;
+            // 
             // gridStrip
             // 
             this.gridStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -174,22 +191,62 @@
             this.buttDelete.Text = "Удалить";
             this.buttDelete.Click += new System.EventHandler(this.ButtDelete_Click);
             // 
-            // ColumnGuid
+            // groupLines
             // 
-            this.ColumnGuid.HeaderText = "Guid";
-            this.ColumnGuid.Name = "ColumnGuid";
-            this.ColumnGuid.ReadOnly = true;
+            this.groupLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupLines.Controls.Add(this.checkAsMask);
+            this.groupLines.Controls.Add(this.checkAsLine);
+            this.groupLines.Controls.Add(this.checkRemove);
+            this.groupLines.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupLines.Location = new System.Drawing.Point(3, 0);
+            this.groupLines.Name = "groupLines";
+            this.groupLines.Size = new System.Drawing.Size(332, 98);
+            this.groupLines.TabIndex = 6;
+            this.groupLines.TabStop = false;
+            this.groupLines.Text = "Обработка пустых строк";
             // 
-            // ColumnSort
+            // checkRemove
             // 
-            this.ColumnSort.HeaderText = "Name";
-            this.ColumnSort.Name = "ColumnSort";
-            this.ColumnSort.ReadOnly = true;
+            this.checkRemove.AutoSize = true;
+            this.checkRemove.Location = new System.Drawing.Point(7, 23);
+            this.checkRemove.Name = "checkRemove";
+            this.checkRemove.Size = new System.Drawing.Size(151, 19);
+            this.checkRemove.TabIndex = 0;
+            this.checkRemove.TabStop = true;
+            this.checkRemove.Text = "Удалять пустые строки";
+            this.checkRemove.UseVisualStyleBackColor = true;
+            this.checkRemove.CheckedChanged += new System.EventHandler(this.StateChanged);
+            // 
+            // checkAsLine
+            // 
+            this.checkAsLine.AutoSize = true;
+            this.checkAsLine.Location = new System.Drawing.Point(7, 48);
+            this.checkAsLine.Name = "checkAsLine";
+            this.checkAsLine.Size = new System.Drawing.Size(221, 19);
+            this.checkAsLine.TabIndex = 1;
+            this.checkAsLine.TabStop = true;
+            this.checkAsLine.Text = "Обрабатывать как обычные строки";
+            this.checkAsLine.UseVisualStyleBackColor = true;
+            this.checkAsLine.CheckedChanged += new System.EventHandler(this.StateChanged);
+            // 
+            // checkAsMask
+            // 
+            this.checkAsMask.AutoSize = true;
+            this.checkAsMask.Location = new System.Drawing.Point(7, 73);
+            this.checkAsMask.Name = "checkAsMask";
+            this.checkAsMask.Size = new System.Drawing.Size(283, 19);
+            this.checkAsMask.TabIndex = 2;
+            this.checkAsMask.TabStop = true;
+            this.checkAsMask.Text = "Использовать как маску (неподвижный якорь)";
+            this.checkAsMask.UseVisualStyleBackColor = true;
+            this.checkAsMask.CheckedChanged += new System.EventHandler(this.StateChanged);
             // 
             // OptionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupLines);
             this.Controls.Add(this.groupUserSort);
             this.Controls.Add(this.groupAutoLoad);
             this.Name = "OptionControl";
@@ -200,6 +257,8 @@
             this.groupUserSort.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridSorts)).EndInit();
             this.gridStrip.ResumeLayout(false);
+            this.groupLines.ResumeLayout(false);
+            this.groupLines.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -216,5 +275,9 @@
         private System.Windows.Forms.ToolStripMenuItem buttDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGuid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSort;
+        private System.Windows.Forms.GroupBox groupLines;
+        private System.Windows.Forms.RadioButton checkAsMask;
+        private System.Windows.Forms.RadioButton checkAsLine;
+        private System.Windows.Forms.RadioButton checkRemove;
     }
 }

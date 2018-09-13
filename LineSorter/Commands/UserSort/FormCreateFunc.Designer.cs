@@ -42,6 +42,8 @@
             this.textAfter = new LineSorter.Commands.UserSort.LangBox();
             this.textBefore = new LineSorter.Commands.UserSort.LangBox();
             this.textMain = new LineSorter.Commands.UserSort.LangBox();
+            this.labelEmpty = new System.Windows.Forms.Label();
+            this.comboLines = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboLang
@@ -125,7 +127,7 @@
             // buttCancel
             // 
             this.buttCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCancel.Location = new System.Drawing.Point(379, 181);
+            this.buttCancel.Location = new System.Drawing.Point(379, 210);
             this.buttCancel.Name = "buttCancel";
             this.buttCancel.Size = new System.Drawing.Size(121, 23);
             this.buttCancel.TabIndex = 9;
@@ -136,7 +138,7 @@
             // buttCompile
             // 
             this.buttCompile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCompile.Location = new System.Drawing.Point(252, 181);
+            this.buttCompile.Location = new System.Drawing.Point(252, 210);
             this.buttCompile.Name = "buttCompile";
             this.buttCompile.Size = new System.Drawing.Size(121, 23);
             this.buttCompile.TabIndex = 10;
@@ -148,7 +150,7 @@
             // 
             this.panelBack.BackColor = System.Drawing.Color.White;
             this.panelBack.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.panelBack.Location = new System.Drawing.Point(15, 143);
+            this.panelBack.Location = new System.Drawing.Point(15, 172);
             this.panelBack.Name = "panelBack";
             this.panelBack.Size = new System.Drawing.Size(485, 17);
             this.panelBack.TabIndex = 11;
@@ -159,7 +161,7 @@
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelName.Location = new System.Drawing.Point(12, 102);
+            this.labelName.Location = new System.Drawing.Point(12, 131);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(42, 15);
             this.labelName.TabIndex = 12;
@@ -168,7 +170,7 @@
             // textName
             // 
             this.textName.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.textName.Location = new System.Drawing.Point(101, 99);
+            this.textName.Location = new System.Drawing.Point(101, 128);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(399, 23);
             this.textName.TabIndex = 13;
@@ -182,8 +184,9 @@
             this.textAfter.CommentColor = System.Drawing.Color.YellowGreen;
             this.textAfter.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textAfter.Freezed = false;
+            this.textAfter.Interval = 1000;
             this.textAfter.KeywordColor = System.Drawing.Color.SteelBlue;
-            this.textAfter.Location = new System.Drawing.Point(15, 160);
+            this.textAfter.Location = new System.Drawing.Point(15, 189);
             this.textAfter.Name = "textAfter";
             this.textAfter.NumericColor = System.Drawing.Color.SpringGreen;
             this.textAfter.ReadOnly = true;
@@ -202,8 +205,9 @@
             this.textBefore.CommentColor = System.Drawing.Color.YellowGreen;
             this.textBefore.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBefore.Freezed = false;
+            this.textBefore.Interval = 1000;
             this.textBefore.KeywordColor = System.Drawing.Color.SteelBlue;
-            this.textBefore.Location = new System.Drawing.Point(15, 128);
+            this.textBefore.Location = new System.Drawing.Point(15, 157);
             this.textBefore.Name = "textBefore";
             this.textBefore.NumericColor = System.Drawing.Color.SpringGreen;
             this.textBefore.ReadOnly = true;
@@ -223,8 +227,9 @@
             this.textMain.CommentColor = System.Drawing.Color.YellowGreen;
             this.textMain.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textMain.Freezed = false;
+            this.textMain.Interval = 1000;
             this.textMain.KeywordColor = System.Drawing.Color.SteelBlue;
-            this.textMain.Location = new System.Drawing.Point(35, 143);
+            this.textMain.Location = new System.Drawing.Point(35, 172);
             this.textMain.MaximumSize = new System.Drawing.Size(465, 200);
             this.textMain.MinimumSize = new System.Drawing.Size(465, 17);
             this.textMain.Name = "textMain";
@@ -236,12 +241,41 @@
             this.textMain.Text = "";
             this.textMain.TextChanged += new System.EventHandler(this.TextMain_TextChanged);
             // 
+            // labelEmpty
+            // 
+            this.labelEmpty.AutoSize = true;
+            this.labelEmpty.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelEmpty.Location = new System.Drawing.Point(12, 102);
+            this.labelEmpty.Name = "labelEmpty";
+            this.labelEmpty.Size = new System.Drawing.Size(74, 15);
+            this.labelEmpty.TabIndex = 15;
+            this.labelEmpty.Text = "Empty Lines:";
+            // 
+            // comboLines
+            // 
+            this.comboLines.DisplayMember = "1";
+            this.comboLines.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboLines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.comboLines.FormattingEnabled = true;
+            this.comboLines.Items.AddRange(new object[] {
+            "Depends on global settings",
+            "Remove",
+            "As ordinary strings",
+            "As mask"});
+            this.comboLines.Location = new System.Drawing.Point(101, 99);
+            this.comboLines.Name = "comboLines";
+            this.comboLines.Size = new System.Drawing.Size(399, 23);
+            this.comboLines.TabIndex = 14;
+            // 
             // FormCreateFunc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 210);
+            this.ClientSize = new System.Drawing.Size(507, 237);
             this.ControlBox = false;
+            this.Controls.Add(this.labelEmpty);
+            this.Controls.Add(this.comboLines);
             this.Controls.Add(this.textName);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.buttCompile);
@@ -285,5 +319,7 @@
         private System.Windows.Forms.Panel panelBack;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.TextBox textName;
+        private System.Windows.Forms.Label labelEmpty;
+        private System.Windows.Forms.ComboBox comboLines;
     }
 }

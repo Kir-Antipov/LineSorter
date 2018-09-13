@@ -1,7 +1,11 @@
-﻿using System;
+﻿using EnvDTE;
+using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
 using System.ComponentModel.Design;
+using Task = System.Threading.Tasks.Task;
+using System.Linq;
 
 namespace LineSorter.Commands
 {
@@ -76,6 +80,27 @@ namespace LineSorter.Commands
             CommandID = NewID;
         }
         public void ChangeCmdID(int NewID) => ChangeCmdID(new CommandID(CommandID.Guid, NewID));
+
+        public async Task SetHotkeyAsync(Keys Mod1, Keys Key1, Keys Key2) => await SetBindingsAsync(GetStringBinding(Mod1, Key1, Key2));
+        public async Task SetHotkeyAsync(Keys Mod1, Keys Key1, Keys Mod2, Keys Key2) => await SetBindingsAsync(GetStringBinding(Mod1, Key1, Mod2, Key2));
+        public async Task RemoveHotkeyAsync() => await SetBindingsAsync();
+        private async Task SetBindingsAsync(params string[] Bindings)
+        {
+            await VSPackage.Instance.JoinableTaskFactory.SwitchToMainThreadAsync();
+            DTE dte = (await VSPackage.Instance.GetServiceAsync(typeof(DTE))) as DTE;
+            Command cmd = dte.Commands.Item(CommandID.Guid.ToString(), CommandID.ID);
+            cmd.Bindings = Bindings;
+        }
+        private string GetStringBinding(params Keys[] Keys)
+        {
+            return $"Global::{string.Join("+", Keys.Select(getKey))}";
+            string getKey(Keys key)
+            {
+                if ((int)key > 47 && (int)key < 58)
+                    return ((int)key - 48).ToString();
+                return key.ToString();
+            }
+        }
 
         public override string ToString() => Text;
         public override int GetHashCode() => CommandID.GetHashCode();

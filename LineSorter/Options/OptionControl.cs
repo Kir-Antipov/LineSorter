@@ -12,6 +12,7 @@ namespace LineSorter.Options
     public partial class OptionControl : UserControl
     {
         #region Var
+        private bool Initialized { get; }
         private List<string> Selected { get; set; }
 
         public Color SelectedSort { get; set; } = Color.LightGreen;
@@ -29,12 +30,22 @@ namespace LineSorter.Options
             Manager["OptionControl", ru] = "Общие";
             Manager["groupAutoLoad", en] = "Autoload";
             Manager["groupAutoLoad", ru] = "Автозагрузка";
+            Manager["groupLines", en] = "Empty lines processing";
+            Manager["groupLines", ru] = "Обработка пустых строк";
             Manager["groupUserSort", en] = "Custom sorts";
             Manager["groupUserSort", ru] = "Пользовательские сортировки";
             Manager["checkLoadOnInit", en] = "Load custom sorts at startup";
             Manager["checkLoadOnInit", ru] = "Загружать пользовательские сортировки при запуске";
             Manager["checkLoadOnCreate", en] = "Load custom sorts on creating";
             Manager["checkLoadOnCreate", ru] = "Загружать пользовательские сортировки при создании";
+            Manager["checkRemove", en] = "Delete empty lines";
+            Manager["checkRemove", ru] = "Удалять пустые строки";
+            Manager["checkAsLine", en] = "Process as ordinary strings";
+            Manager["checkAsLine", ru] = "Обрабатывать как обычные строки";
+            Manager["checkAsMask", en] = "Use as mask (fixed anchor)";
+            Manager["checkAsMask", ru] = "Использовать как маску (неподвижный якорь)";
+            Manager["checkAsGroupMarker", en] = "Use as separator";
+            Manager["checkAsGroupMarker", ru] = "Использовать как разделитель";
             Manager["buttDelete", en] = "Delete";
             Manager["buttDelete", ru] = "Удалить";
             Manager["buttUse.Use", en] = "Use";
@@ -53,9 +64,9 @@ namespace LineSorter.Options
             Selected = new List<string>(VSPackage.Loader.Settings.Loaded);
             checkLoadOnInit.Checked = VSPackage.Loader.Settings.LoadOnInit;
             checkLoadOnCreate.Checked = VSPackage.Loader.Settings.LoadOnCreate;
-            foreach (Control x in new Control[] { this, groupAutoLoad, groupUserSort, checkLoadOnInit, checkLoadOnCreate })
-                x.Text = Manager[x.Name];
-            buttDelete.Text = Manager["buttDelete"];
+            groupLines.Controls.OfType<RadioButton>().First(x => x.Name.EndsWith(VSPackage.Loader.Settings.EmptyLineAction.ToString())).Checked = true;
+            Manager.Localize(this);
+            Initialized = true;
         }
         #endregion
 
@@ -100,22 +111,30 @@ namespace LineSorter.Options
             foreach (DataGridViewCell cell in Row.Cells)
                 cell.Style.BackColor = Color;
         }
+
+        private void UpdateSettings()
+        {
+            if (Initialized)
+            {
+                VSPackage.Loader.Settings.LoadOnInit = checkLoadOnInit.Checked;
+                VSPackage.Loader.Settings.LoadOnCreate = checkLoadOnCreate.Checked;
+                VSPackage.Loader.Settings.EmptyLineAction = (EmptyLineAction)System.Enum.Parse(typeof(EmptyLineAction), groupLines.Controls.OfType<RadioButton>().FirstOrDefault(x => x.Checked)?.Name.Replace("check", string.Empty) ?? "Remove");
+                VSPackage.Loader.Settings.Save(SortsLoader.SettingsPath);
+            }
+        }
         #endregion
 
         #region Actions
-        private void CheckLoadOnInit_CheckedChanged(object sender, System.EventArgs e)
-        {
-            VSPackage.Loader.Settings.LoadOnInit = checkLoadOnInit.Checked;
-            VSPackage.Loader.Settings.Save(SortsLoader.SettingsPath);
-        }
+        private void StateChanged(object sender, System.EventArgs e) => UpdateSettings();
 
-        private void CheckLoadOnCreate_CheckedChanged(object sender, System.EventArgs e)
+        private void OptionControl_VisibleChanged(object sender, System.EventArgs e)
         {
-            VSPackage.Loader.Settings.LoadOnCreate = checkLoadOnCreate.Checked;
-            VSPackage.Loader.Settings.Save(SortsLoader.SettingsPath);
-        }
+            // Refresh sizes
+            checkLoadOnCreate.AutoSize = checkLoadOnInit.AutoSize = false;
+            checkLoadOnCreate.AutoSize = checkLoadOnInit.AutoSize = true;
 
-        private void OptionControl_VisibleChanged(object sender, System.EventArgs e) => RefreshData();
+            RefreshData();
+        }
 
         private void GridSorts_MouseDown(object sender, MouseEventArgs e)
         {

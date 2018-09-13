@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using LineSorter.Export;
 using System.Xml.Serialization;
 
 namespace LineSorter.Options
@@ -9,6 +10,7 @@ namespace LineSorter.Options
         public string[] Loaded { get; set; }
         public bool LoadOnInit { get; set; }
         public bool LoadOnCreate { get; set; }
+        public EmptyLineAction EmptyLineAction { get; set; } = EmptyLineAction.Remove;
         #endregion
 
         #region Functions

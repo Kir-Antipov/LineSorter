@@ -1,11 +1,7 @@
-﻿using EnvDTE;
-using System;
+﻿using System;
 using System.Linq;
 using LineSorter.Export;
-using LineSorter.Options;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Threading;
-using Microsoft.VisualStudio.Shell.Interop;
 
 namespace LineSorter.Commands
 {

@@ -6,6 +6,7 @@ namespace LineSorter.Export
     {
         string Guid { get; }
         string Name { get; }
+        EmptyLineAction EmptyLineAction { get; }
         IEnumerable<string> Sort(IEnumerable<string> Source);
     }
 }

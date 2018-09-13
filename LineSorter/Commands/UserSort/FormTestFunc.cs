@@ -50,8 +50,7 @@ using Antlr4;
 using Microsoft.CodeAnalysis.Text;
 using Antlr4.Runtime.Misc;";
             this.Sorter = Sorter;
-            foreach (Control x in new Control[] { this, labelTest, labelResult, buttDone })
-                x.Text = Manager[x.Name];
+            Manager.Localize(this);
             Sort();
         }
         #endregion

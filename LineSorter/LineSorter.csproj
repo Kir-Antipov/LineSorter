@@ -128,8 +128,7 @@
     </Reference>
     <Reference Include="LineSorter.Export, Version=3.0.0.0, Culture=neutral, PublicKeyToken=729d2f0891d67ced, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>UserSort\LineSorter.Export.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>.\LineSorter.Export.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -238,7 +237,9 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <VSCTCompile Include="CommandTables\VSPackage.en.vsct">
@@ -279,6 +280,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="LineSorter.Export.dll">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\CommandTable.tt" />
     <Content Include="Templates\BuildAll.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -286,10 +291,6 @@
     </Content>
     <Content Include="Templates\Resource.tt" />
     <Content Include="Templates\VSPackage.tt" />
-    <Content Include="UserSort\LineSorter.Export.dll">
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Templates\BuildAll.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

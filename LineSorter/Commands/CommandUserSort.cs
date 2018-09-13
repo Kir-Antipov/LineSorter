@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using LineSorter.Export;
-using System.Reflection;
 using LineSorter.Helpers;
-using LineSorter.Options;
 using System.Collections.Generic;
 using LineSorter.Commands.UserSort;
 using Microsoft.VisualStudio.Shell;
@@ -27,7 +24,7 @@ namespace LineSorter.Commands
             CommandID = 0x0105;
             CommandSet = new Guid("e9f69e2b-6313-4c2b-9765-1ddd6439d519");
             SavePath = Path.Combine(VSPackage.Path, "UserSort\\");
-            ExportFile = Path.Combine(SavePath, "LineSorter.Export.dll");
+            ExportFile = new Uri(typeof(IUserSort).Assembly.CodeBase, UriKind.Absolute).LocalPath;
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);
         }
@@ -49,7 +46,7 @@ namespace LineSorter.Commands
 
         public void AddSort(IUserSort Sort)
         {
-            MenuCommandWrapper wrapper = Factory.Create(() => Sort.Sort(TextSelection.GetSelection(Package, out bool was)).ReplaceSelection(was), Sort.Name);
+            MenuCommandWrapper wrapper = Factory.Create(() => Sort.Sort(TextSelection.GetSelection(Package, Sort.EmptyLineAction, out int[] poses, out bool was)).ReplaceSelection(Sort.EmptyLineAction, poses, was), Sort.Name);
             wrapper.SetParameter("Guid", Sort.Guid);
         }
         #endregion

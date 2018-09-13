@@ -18,7 +18,7 @@ namespace LineSorter.Commands
 
         #region Functions
         protected override void Execute(OleMenuCommand Button) =>
-            TextSelection.GetSelection(Package, out bool newLine).Select(x => (Row)x).OrderByDescending(x => x.Cleared.Length).ThenByDescending(x => x.Cleared).Select(x => (string)x).ReplaceSelection(newLine);
+            TextSelection.GetSelection(Package, out int[] poses, out bool newLine).Select(x => (Row)x).OrderByDescending(x => x.Cleared.Length).ThenByDescending(x => x.Cleared).Select(x => (string)x).ReplaceSelection(poses, newLine);
         #endregion
     }
 }

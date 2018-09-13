@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Windows.Forms;
 using System.Collections.Generic;
 
 namespace LineSorter.Helpers
@@ -24,10 +25,52 @@ namespace LineSorter.Helpers
             get => Get(Key);
             set => Set(Key, value);
         }
+        public string this[Control Control]
+        {
+            get => Get(Control.Name);
+            set => Set(Control.Name, value);
+        }
         public string this[string Key, CultureInfo Culture]
         {
             get => Get(Key, Culture);
             set => Set(Key, value, Culture);
+        }
+        public string this[Control Control, CultureInfo Culture]
+        {
+            get => Get(Control.Name, Culture);
+            set => Set(Control.Name, value, Culture);
+        }
+
+        public void Localize(Control Container)
+        {
+            string text = Get(Container.Name);
+            if (text != null)
+                Container.Text = text;
+            if (Container.ContextMenuStrip != null)
+                Localize(Container.ContextMenuStrip);
+            foreach (Control x in Container.Controls)
+                Localize(x);
+            if (Container is ComboBox combo)
+                LocalizeItems(combo);
+        }
+        private void Localize(ToolStrip Container)
+        {
+            string text = Get(Container.Name);
+            if (text != null)
+                Container.Text = text;
+            foreach (ToolStripItem x in Container.Items)
+            {
+                text = Get(x.Name);
+                if (text != null)
+                    x.Text = text;
+            }
+        }
+
+        public void LocalizeItems(ComboBox Box)
+        {
+            int count = Box.Items.Count;
+            for (int i = 0; i < count; ++i)
+                Box.Items[i] = Get($"{Box.Name}.Items.{i}") ?? Box.Items[i];
         }
 
         public static void Set(string Key, string Value, CultureInfo Culture)

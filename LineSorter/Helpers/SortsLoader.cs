@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 using LineSorter.Export;
 using LineSorter.Options;
 using LineSorter.Commands;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace LineSorter.Helpers
