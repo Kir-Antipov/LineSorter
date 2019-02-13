@@ -144,7 +144,7 @@ namespace LineSorter.Commands.UserSort
         }
         protected override bool ProcessCmdKey(ref Message Msg, Keys KeyData)
         {
-            if ((Msg.Msg == 0x100 || Msg.Msg == 0x104) && KeyData == Keys.Tab || KeyData == (Keys.Tab | Keys.Shift))
+            if (!ReadOnly && (Msg.Msg == 0x100 || Msg.Msg == 0x104) && KeyData == Keys.Tab || KeyData == (Keys.Tab | Keys.Shift))
             {
                 lock (_lock)
                 {

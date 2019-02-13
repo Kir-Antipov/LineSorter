@@ -39,7 +39,7 @@
             // 
             this.labelTest.AutoSize = true;
             this.labelTest.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTest.Location = new System.Drawing.Point(12, 9);
+            this.labelTest.Location = new System.Drawing.Point(3, 9);
             this.labelTest.Name = "labelTest";
             this.labelTest.Size = new System.Drawing.Size(34, 15);
             this.labelTest.TabIndex = 4;
@@ -47,9 +47,10 @@
             // 
             // labelResult
             // 
+            this.labelResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelResult.AutoSize = true;
             this.labelResult.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelResult.Location = new System.Drawing.Point(251, 9);
+            this.labelResult.Location = new System.Drawing.Point(244, 9);
             this.labelResult.Name = "labelResult";
             this.labelResult.Size = new System.Drawing.Size(63, 15);
             this.labelResult.TabIndex = 5;
@@ -57,16 +58,20 @@
             // 
             // buttDone
             // 
-            this.buttDone.Location = new System.Drawing.Point(374, 263);
+            this.buttDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttDone.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttDone.Location = new System.Drawing.Point(367, 263);
             this.buttDone.Name = "buttDone";
             this.buttDone.Size = new System.Drawing.Size(115, 23);
-            this.buttDone.TabIndex = 10;
+            this.buttDone.TabIndex = 2;
             this.buttDone.Text = "Готово";
             this.buttDone.UseVisualStyleBackColor = true;
             this.buttDone.Click += new System.EventHandler(this.ButtDone_Click);
             // 
             // textResult
             // 
+            this.textResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textResult.AutoHeight = false;
             this.textResult.BackColor = System.Drawing.Color.White;
             this.textResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -74,8 +79,9 @@
             this.textResult.CommentColor = System.Drawing.Color.YellowGreen;
             this.textResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textResult.Freezed = false;
+            this.textResult.Interval = 1000;
             this.textResult.KeywordColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.textResult.Location = new System.Drawing.Point(254, 27);
+            this.textResult.Location = new System.Drawing.Point(247, 27);
             this.textResult.Name = "textResult";
             this.textResult.NumericColor = System.Drawing.Color.MediumSeaGreen;
             this.textResult.ReadOnly = true;
@@ -87,6 +93,8 @@
             // 
             // textTest
             // 
+            this.textTest.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textTest.AutoHeight = false;
             this.textTest.BackColor = System.Drawing.Color.White;
             this.textTest.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -94,8 +102,9 @@
             this.textTest.CommentColor = System.Drawing.Color.YellowGreen;
             this.textTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textTest.Freezed = false;
+            this.textTest.Interval = 1000;
             this.textTest.KeywordColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.textTest.Location = new System.Drawing.Point(12, 27);
+            this.textTest.Location = new System.Drawing.Point(6, 27);
             this.textTest.Name = "textTest";
             this.textTest.NumericColor = System.Drawing.Color.MediumSeaGreen;
             this.textTest.Size = new System.Drawing.Size(235, 230);
@@ -107,22 +116,23 @@
             // 
             // FormTestFunc
             // 
+            this.AcceptButton = this.buttDone;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 290);
-            this.ControlBox = false;
+            this.CancelButton = this.buttDone;
+            this.ClientSize = new System.Drawing.Size(494, 293);
             this.Controls.Add(this.buttDone);
             this.Controls.Add(this.labelResult);
             this.Controls.Add(this.labelTest);
             this.Controls.Add(this.textResult);
             this.Controls.Add(this.textTest);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormTestFunc";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тест функции сортировки";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FormTestFunc_Load);
+            this.Resize += new System.EventHandler(this.FormTestFunc_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

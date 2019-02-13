@@ -102,8 +102,7 @@ namespace LineSorter.Commands.UserSort
             comboType.SelectedIndex = 0;
             comboLines.SelectedIndex = 0;
             Measure = Graphics.FromImage(new Bitmap(textMain.Width, textMain.MaximumSize.Height));
-            Manager.Localize(this);
-            
+            Manager.Localize(this);          
         }
         public FormCreateFunc() : this(string.Empty) { } 
         #endregion
@@ -297,6 +296,8 @@ namespace LineSorter.Commands.UserSort
             base.ShowDialog();
             return DialogResult;
         }
+
+        private void FormCreateFunc_Load(object sender, EventArgs e) => ControlBox = ShowIcon = MinimizeBox = MaximizeBox = false;
         #endregion
     }
 }

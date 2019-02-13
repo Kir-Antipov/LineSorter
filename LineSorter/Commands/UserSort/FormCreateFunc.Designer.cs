@@ -39,15 +39,17 @@
             this.panelBack = new System.Windows.Forms.Panel();
             this.labelName = new System.Windows.Forms.Label();
             this.textName = new System.Windows.Forms.TextBox();
+            this.labelEmpty = new System.Windows.Forms.Label();
+            this.comboLines = new System.Windows.Forms.ComboBox();
             this.textAfter = new LineSorter.Commands.UserSort.LangBox();
             this.textBefore = new LineSorter.Commands.UserSort.LangBox();
             this.textMain = new LineSorter.Commands.UserSort.LangBox();
-            this.labelEmpty = new System.Windows.Forms.Label();
-            this.comboLines = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboLang
             // 
+            this.comboLang.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboLang.DisplayMember = "1";
             this.comboLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboLang.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -63,6 +65,8 @@
             // 
             // comboFunc
             // 
+            this.comboFunc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboFunc.DisplayMember = "1";
             this.comboFunc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFunc.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -78,6 +82,8 @@
             // 
             // comboType
             // 
+            this.comboType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboType.DisplayMember = "1";
             this.comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboType.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -126,22 +132,25 @@
             // 
             // buttCancel
             // 
+            this.buttCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCancel.Location = new System.Drawing.Point(379, 210);
+            this.buttCancel.Location = new System.Drawing.Point(379, 211);
             this.buttCancel.Name = "buttCancel";
             this.buttCancel.Size = new System.Drawing.Size(121, 23);
-            this.buttCancel.TabIndex = 9;
+            this.buttCancel.TabIndex = 7;
             this.buttCancel.Text = "Cancel";
             this.buttCancel.UseVisualStyleBackColor = true;
             this.buttCancel.Click += new System.EventHandler(this.ButtCancel_Click);
             // 
             // buttCompile
             // 
+            this.buttCompile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttCompile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCompile.Location = new System.Drawing.Point(252, 210);
+            this.buttCompile.Location = new System.Drawing.Point(252, 211);
             this.buttCompile.Name = "buttCompile";
             this.buttCompile.Size = new System.Drawing.Size(121, 23);
-            this.buttCompile.TabIndex = 10;
+            this.buttCompile.TabIndex = 6;
             this.buttCompile.Text = "Compile";
             this.buttCompile.UseVisualStyleBackColor = true;
             this.buttCompile.Click += new System.EventHandler(this.ButtCompile_Click);
@@ -169,14 +178,47 @@
             // 
             // textName
             // 
+            this.textName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textName.Location = new System.Drawing.Point(101, 128);
             this.textName.Name = "textName";
             this.textName.Size = new System.Drawing.Size(399, 23);
-            this.textName.TabIndex = 13;
+            this.textName.TabIndex = 4;
+            // 
+            // labelEmpty
+            // 
+            this.labelEmpty.AutoSize = true;
+            this.labelEmpty.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.labelEmpty.Location = new System.Drawing.Point(12, 102);
+            this.labelEmpty.Name = "labelEmpty";
+            this.labelEmpty.Size = new System.Drawing.Size(74, 15);
+            this.labelEmpty.TabIndex = 15;
+            this.labelEmpty.Text = "Empty Lines:";
+            // 
+            // comboLines
+            // 
+            this.comboLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboLines.DisplayMember = "1";
+            this.comboLines.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboLines.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.comboLines.FormattingEnabled = true;
+            this.comboLines.Items.AddRange(new object[] {
+            "Depends on global settings",
+            "Remove",
+            "As ordinary strings",
+            "As mask"});
+            this.comboLines.Location = new System.Drawing.Point(101, 99);
+            this.comboLines.Name = "comboLines";
+            this.comboLines.Size = new System.Drawing.Size(399, 23);
+            this.comboLines.TabIndex = 3;
             // 
             // textAfter
             // 
+            this.textAfter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textAfter.AutoHeight = true;
             this.textAfter.BackColor = System.Drawing.Color.White;
             this.textAfter.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -198,6 +240,8 @@
             // 
             // textBefore
             // 
+            this.textBefore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBefore.AutoHeight = true;
             this.textBefore.BackColor = System.Drawing.Color.White;
             this.textBefore.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -219,7 +263,9 @@
             // 
             // textMain
             // 
-            this.textMain.AcceptsTab = true;
+            this.textMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textMain.AutoHeight = true;
             this.textMain.BackColor = System.Drawing.Color.White;
             this.textMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -236,44 +282,18 @@
             this.textMain.NumericColor = System.Drawing.Color.MediumSeaGreen;
             this.textMain.Size = new System.Drawing.Size(465, 17);
             this.textMain.StringColor = System.Drawing.Color.Firebrick;
-            this.textMain.TabIndex = 6;
+            this.textMain.TabIndex = 5;
             this.textMain.TabSize = 4;
             this.textMain.Text = "";
             this.textMain.TextChanged += new System.EventHandler(this.TextMain_TextChanged);
             // 
-            // labelEmpty
-            // 
-            this.labelEmpty.AutoSize = true;
-            this.labelEmpty.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelEmpty.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelEmpty.Location = new System.Drawing.Point(12, 102);
-            this.labelEmpty.Name = "labelEmpty";
-            this.labelEmpty.Size = new System.Drawing.Size(74, 15);
-            this.labelEmpty.TabIndex = 15;
-            this.labelEmpty.Text = "Empty Lines:";
-            // 
-            // comboLines
-            // 
-            this.comboLines.DisplayMember = "1";
-            this.comboLines.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboLines.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.comboLines.FormattingEnabled = true;
-            this.comboLines.Items.AddRange(new object[] {
-            "Depends on global settings",
-            "Remove",
-            "As ordinary strings",
-            "As mask"});
-            this.comboLines.Location = new System.Drawing.Point(101, 99);
-            this.comboLines.Name = "comboLines";
-            this.comboLines.Size = new System.Drawing.Size(399, 23);
-            this.comboLines.TabIndex = 14;
-            // 
             // FormCreateFunc
             // 
+            this.AcceptButton = this.buttCompile;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 237);
-            this.ControlBox = false;
+            this.CancelButton = this.buttCancel;
+            this.ClientSize = new System.Drawing.Size(512, 246);
             this.Controls.Add(this.labelEmpty);
             this.Controls.Add(this.comboLines);
             this.Controls.Add(this.textName);
@@ -291,13 +311,11 @@
             this.Controls.Add(this.comboLang);
             this.Controls.Add(this.panelBack);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormCreateFunc";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Creating a custom sort";
+            this.Load += new System.EventHandler(this.FormCreateFunc_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

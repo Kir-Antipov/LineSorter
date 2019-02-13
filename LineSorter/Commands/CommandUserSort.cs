@@ -46,7 +46,7 @@ namespace LineSorter.Commands
 
         public void AddSort(IUserSort Sort)
         {
-            MenuCommandWrapper wrapper = Factory.Create(() => Sort.Sort(TextSelection.GetSelection(Package, Sort.EmptyLineAction, out int[] poses, out bool was)).ReplaceSelection(Sort.EmptyLineAction, poses, was), Sort.Name);
+            MenuCommandWrapper wrapper = Factory.Create(() => Sort.Sort(TextSelection.GetSelection(Package, Sort.EmptyLineAction, out int[] poses, out NewlineType newlineType, out bool was)).ReplaceSelection(Sort.EmptyLineAction, poses, newlineType, was), Sort.Name);
             wrapper.SetParameter("Guid", Sort.Guid);
         }
         #endregion

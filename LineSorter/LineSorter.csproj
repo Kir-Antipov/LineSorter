@@ -86,6 +86,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helpers\AssemblyLoader.cs" />
+    <Compile Include="Helpers\NewlineType.cs" />
     <Compile Include="Helpers\ResourceManager.cs" />
     <Compile Include="Helpers\SortsLoader.cs" />
     <Compile Include="Options\OptionControl.cs">

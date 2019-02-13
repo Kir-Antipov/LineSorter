@@ -63,6 +63,14 @@ using Antlr4.Runtime.Misc;";
         }
         private void ButtDone_Click(object sender, EventArgs e) => Close();
         private void TextTest_TextChanged(object sender, EventArgs e) => Sort();
+        private void FormTestFunc_Resize(object sender, EventArgs e)
+        {
+            textTest.Width = textResult.Width = (Width - 18) / 2;
+            textResult.Left = labelResult.Left = 12 + textTest.Width;
+            textTest.Height = textResult.Height = buttDone.Top - 6 - labelTest.Top - labelTest.Height;
+        }
+
+        private void FormTestFunc_Load(object sender, EventArgs e) => ControlBox = ShowIcon = MinimizeBox = MaximizeBox = false;
         #endregion
     }
 }

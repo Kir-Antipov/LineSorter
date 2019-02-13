@@ -22,7 +22,7 @@ namespace LineSorter.Commands
 
         #region Functions
         protected override void Execute(OleMenuCommand Button) =>
-            Shuffle(TextSelection.GetSelection(Package, out int[] poses, out bool newLine)).ReplaceSelection(poses, newLine);
+            Shuffle(TextSelection.GetSelection(Package, out int[] poses, out NewlineType newlineType, out bool newLine)).ReplaceSelection(poses, newlineType, newLine);
 
         private static IEnumerable<T> Shuffle<T>(IEnumerable<T> Source)
         {
