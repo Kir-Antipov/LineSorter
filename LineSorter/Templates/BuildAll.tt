@@ -7,5 +7,4 @@
 <# Group[] groups = Group.Groups; #>
 <#@ include file="CommandTable.tt" #>
 <#@ include file="Resource.tt" #>
-<#@ include file="VSPackage.tt" #>
 Success!

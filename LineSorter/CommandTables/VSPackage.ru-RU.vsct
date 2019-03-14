@@ -80,6 +80,9 @@
     <CommandPlacement guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0600">
       <Parent guid="XAML" id="Context" />
     </CommandPlacement>
+    <CommandPlacement guid="guidVSPackageCmdSet" id="MainGroup" priority="0x0600">
+      <Parent guid="JSON" id="Context" />
+    </CommandPlacement>
     <CommandPlacement guid="guidVSPackageCmdSet" id="MainMenu" priority="0x0001">
       <Parent guid="guidVSPackageCmdSet" id="MainGroup" />
     </CommandPlacement>
@@ -154,6 +157,9 @@
     </GuidSymbol>
     <GuidSymbol name="XAML" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">
       <IDSymbol name="Context" value="259"/>
+    </GuidSymbol>
+    <GuidSymbol name="JSON" value="{F718CA06-CF4F-4A0C-9106-E79E9EE5E7CD}">
+      <IDSymbol name="Context" value="3"/>
     </GuidSymbol>
   </Symbols>
 </CommandTable>

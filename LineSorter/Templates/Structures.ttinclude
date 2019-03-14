@@ -144,7 +144,8 @@
     private class ContextMenu : GuidSymbol
     {
         public static ContextMenu[] Menus { get; } = new ContextMenu[] {
-            new ContextMenu("XAML", "{4C87B692-1202-46AA-B64C-EF01FAEC53DA}", "259")
+            new ContextMenu("XAML", "{4C87B692-1202-46AA-B64C-EF01FAEC53DA}", "259"),
+            new ContextMenu("JSON", "{F718CA06-CF4F-4A0C-9106-E79E9EE5E7CD}", "3")
         };
 
         public ContextMenu(string Name, string Guid, string ID) : base(Name, Guid, ID) { }
