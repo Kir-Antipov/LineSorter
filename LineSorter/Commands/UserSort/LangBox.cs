@@ -61,12 +61,12 @@ namespace LineSorter.Commands.UserSort
         public LangBox()
         {
             Tokens = new Token[] {
-                new Token(new Regex("namespace|unchecked|continue|delegate|checked|decimal|default|public|static|using|finally|foreach|double|object|params|return|sizeof|string|switch|typeof|unsafe|ushort|break|catch|const|false|fixed|float|sbyte|short|throw|ulong|while|bool|byte|case|char|else|goto|lock|long|null|true|uint|void|Void|for|int|new|out|ref|try|as|do|if|in|is|ByVal|ByRef|As|Of|Optional|ParamArray|If|Else|And|Or|Xor|False|True|And|AndAlso|Is|IsNot|Like|Mod|OrElse|Then|Sub|End|Function|Public|Return|CType"), KeywordColor, true),
+                new Token(new Regex("namespace|unchecked|continue|delegate|checked|decimal|default|public|static|using|finally|foreach|double|object|params|return|sizeof|string|switch|typeof|unsafe|ushort|break|catch|const|false|fixed|float|sbyte|short|throw|ulong|while|bool|byte|case|char|else|goto|lock|long|null|true|uint|void|Void|for|int|new|out|ref|try|as|do|if|in|is|ByVal|ByRef|As|Of|Optional|ParamArray|If|Else|And|Or|Xor|False|True|And|AndAlso|Is|IsNot|Like|Mod|OrElse|Then|Sub|End|Function|Public|Return|CType|var"), KeywordColor, true),
                 new Token(new Regex("IEnumerable|Random|Boolean|Regex|Match|MatchCollection|Int16|Int32|Int64|Integer|String|Char|Decimal|Double|Float|Delegate|Action|Row"), ClassColor, true),
                 new Token(new Regex("([-]+)?[0-9]+"), NumericColor, true),
                 new Token(new Regex("\".*\""), StringColor, false),
                 new Token(new Regex("@\".*\"", RegexOptions.Singleline), StringColor, false),
-                new Token(new Regex("/*.*/", RegexOptions.Singleline), CommentColor, false),
+                new Token(new Regex(@"/\*.*\*/", RegexOptions.Singleline), CommentColor, false),
                 new Token(new Regex("//.*"), CommentColor, false),
                 new Token(new Regex("''.*"), CommentColor, false)
             };

@@ -8,6 +8,7 @@ using LineSorter.Helpers;
 using System.Globalization;
 using System.Windows.Forms;
 using System.CodeDom.Compiler;
+using Microsoft.CodeDom.Providers.DotNetCompilerPlatform;
 
 namespace LineSorter.Commands.UserSort
 {
@@ -30,6 +31,7 @@ namespace LineSorter.Commands.UserSort
         private string[] DefaultAssemblies { get; } = new string[] {
             "System",
             "System.Xml",
+            "System.Web", // Ha-ha, funny joke, Roslyn... (vbc.exe doesn't work without this reference)
             "System.Core",
             "System.Data",
             "System.Net.Http",
@@ -40,6 +42,30 @@ namespace LineSorter.Commands.UserSort
         };
         public new IUserSort DialogResult { get; private set; }
         private static ResourceManager<FormCreateFunc> Manager { get; } = ResourceManager<FormCreateFunc>.Instance;
+
+        private abstract class CompilerSettings : ICompilerSettings
+        {
+            public string CompilerFullPath { get; }
+            public int CompilerServerTimeToLive { get; }
+
+            protected CompilerSettings(string CompilerName)
+            {
+                CompilerFullPath = Path.Combine(Path.GetDirectoryName(VSPackage.DllLocation), $"roslyn\\{CompilerName}.exe");
+                CompilerServerTimeToLive = 0;
+            }
+        }
+        private class CSCompilerSettings : CompilerSettings
+        {
+            public static ICompilerSettings Instance { get; } = new CSCompilerSettings();
+
+            private CSCompilerSettings() : base("csc") { }
+        }
+        private class VBCompilerSettings : CompilerSettings
+        {
+            public static ICompilerSettings Instance { get; } = new VBCompilerSettings();
+
+            private VBCompilerSettings() : base("vbc") { }
+        }
         #endregion
 
         #region Init
@@ -213,7 +239,7 @@ namespace LineSorter.Commands.UserSort
             CompilerParameters options = new CompilerParameters { GenerateExecutable = false, GenerateInMemory = false, OutputAssembly = $"{SavePath}{guid}.dll" };
             foreach (string a in DefaultAssemblies.Select(x => x.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) ? x : $"{x}.dll"))
                 options.ReferencedAssemblies.Add(a);
-            CompilerResults results = (isCSharp ? new Microsoft.CSharp.CSharpCodeProvider() : (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()).CompileAssemblyFromSource(options, resultCode);
+            CompilerResults results = (isCSharp ? new CSharpCodeProvider(CSCompilerSettings.Instance) : (CodeDomProvider)new VBCodeProvider(VBCompilerSettings.Instance)).CompileAssemblyFromSource(options, resultCode);
             if (results.Errors.HasErrors)
                 ShowError(string.Join(Environment.NewLine + Environment.NewLine, results.Errors.Cast<CompilerError>().Where(x => !x.IsWarning).Select(x => x.ErrorText)));
             else
@@ -298,6 +324,9 @@ namespace LineSorter.Commands.UserSort
         }
 
         private void FormCreateFunc_Load(object sender, EventArgs e) => ControlBox = ShowIcon = MinimizeBox = MaximizeBox = false;
+
+        private void TextMain_Enter(object sender, EventArgs e) => AcceptButton = null;
+        private void TextMain_Leave(object sender, EventArgs e) => AcceptButton = buttCompile;
         #endregion
     }
 }

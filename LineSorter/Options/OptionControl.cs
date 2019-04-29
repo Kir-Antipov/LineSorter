@@ -3,6 +3,7 @@ using System.Linq;
 using System.Drawing;
 using LineSorter.Export;
 using LineSorter.Helpers;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ namespace LineSorter.Options
         public OptionControl()
         {
             InitializeComponent();
+            Dock = DockStyle.Fill;
+
             Selected = new List<string>(VSPackage.Loader.Settings.Loaded);
             checkLoadOnInit.Checked = VSPackage.Loader.Settings.LoadOnInit;
             checkLoadOnCreate.Checked = VSPackage.Loader.Settings.LoadOnCreate;
@@ -188,7 +191,8 @@ namespace LineSorter.Options
                 File.Delete(file);
             RefreshData();
         }
-        #endregion
 
+        private void ButtDonate_Click(object sender, System.EventArgs e) => Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4L6Q6P7UAW7WS&source=url");
+        #endregion
     }
 }

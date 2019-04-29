@@ -43,9 +43,11 @@
             this.buttUse = new System.Windows.Forms.ToolStripMenuItem();
             this.buttDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.groupLines = new System.Windows.Forms.GroupBox();
-            this.checkRemove = new System.Windows.Forms.RadioButton();
-            this.checkAsLine = new System.Windows.Forms.RadioButton();
             this.checkAsMask = new System.Windows.Forms.RadioButton();
+            this.checkAsLine = new System.Windows.Forms.RadioButton();
+            this.checkRemove = new System.Windows.Forms.RadioButton();
+            this.buttDonate = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupAutoLoad.SuspendLayout();
             this.groupUserSort.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridSorts)).BeginInit();
@@ -60,7 +62,7 @@
             this.groupAutoLoad.Controls.Add(this.checkLoadOnCreate);
             this.groupAutoLoad.Controls.Add(this.checkLoadOnInit);
             this.groupAutoLoad.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupAutoLoad.Location = new System.Drawing.Point(3, 104);
+            this.groupAutoLoad.Location = new System.Drawing.Point(3, 136);
             this.groupAutoLoad.Name = "groupAutoLoad";
             this.groupAutoLoad.Size = new System.Drawing.Size(332, 79);
             this.groupAutoLoad.TabIndex = 5;
@@ -94,7 +96,7 @@
             this.groupUserSort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupUserSort.Controls.Add(this.gridSorts);
-            this.groupUserSort.Location = new System.Drawing.Point(3, 189);
+            this.groupUserSort.Location = new System.Drawing.Point(3, 221);
             this.groupUserSort.Name = "groupUserSort";
             this.groupUserSort.Size = new System.Drawing.Size(332, 64);
             this.groupUserSort.TabIndex = 6;
@@ -199,36 +201,12 @@
             this.groupLines.Controls.Add(this.checkAsLine);
             this.groupLines.Controls.Add(this.checkRemove);
             this.groupLines.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupLines.Location = new System.Drawing.Point(3, 0);
+            this.groupLines.Location = new System.Drawing.Point(3, 32);
             this.groupLines.Name = "groupLines";
             this.groupLines.Size = new System.Drawing.Size(332, 98);
             this.groupLines.TabIndex = 6;
             this.groupLines.TabStop = false;
             this.groupLines.Text = "Обработка пустых строк";
-            // 
-            // checkRemove
-            // 
-            this.checkRemove.AutoSize = true;
-            this.checkRemove.Location = new System.Drawing.Point(7, 23);
-            this.checkRemove.Name = "checkRemove";
-            this.checkRemove.Size = new System.Drawing.Size(151, 19);
-            this.checkRemove.TabIndex = 0;
-            this.checkRemove.TabStop = true;
-            this.checkRemove.Text = "Удалять пустые строки";
-            this.checkRemove.UseVisualStyleBackColor = true;
-            this.checkRemove.CheckedChanged += new System.EventHandler(this.StateChanged);
-            // 
-            // checkAsLine
-            // 
-            this.checkAsLine.AutoSize = true;
-            this.checkAsLine.Location = new System.Drawing.Point(7, 48);
-            this.checkAsLine.Name = "checkAsLine";
-            this.checkAsLine.Size = new System.Drawing.Size(221, 19);
-            this.checkAsLine.TabIndex = 1;
-            this.checkAsLine.TabStop = true;
-            this.checkAsLine.Text = "Обрабатывать как обычные строки";
-            this.checkAsLine.UseVisualStyleBackColor = true;
-            this.checkAsLine.CheckedChanged += new System.EventHandler(this.StateChanged);
             // 
             // checkAsMask
             // 
@@ -242,10 +220,62 @@
             this.checkAsMask.UseVisualStyleBackColor = true;
             this.checkAsMask.CheckedChanged += new System.EventHandler(this.StateChanged);
             // 
+            // checkAsLine
+            // 
+            this.checkAsLine.AutoSize = true;
+            this.checkAsLine.Location = new System.Drawing.Point(7, 48);
+            this.checkAsLine.Name = "checkAsLine";
+            this.checkAsLine.Size = new System.Drawing.Size(221, 19);
+            this.checkAsLine.TabIndex = 1;
+            this.checkAsLine.TabStop = true;
+            this.checkAsLine.Text = "Обрабатывать как обычные строки";
+            this.checkAsLine.UseVisualStyleBackColor = true;
+            this.checkAsLine.CheckedChanged += new System.EventHandler(this.StateChanged);
+            // 
+            // checkRemove
+            // 
+            this.checkRemove.AutoSize = true;
+            this.checkRemove.Location = new System.Drawing.Point(7, 23);
+            this.checkRemove.Name = "checkRemove";
+            this.checkRemove.Size = new System.Drawing.Size(151, 19);
+            this.checkRemove.TabIndex = 0;
+            this.checkRemove.TabStop = true;
+            this.checkRemove.Text = "Удалять пустые строки";
+            this.checkRemove.UseVisualStyleBackColor = true;
+            this.checkRemove.CheckedChanged += new System.EventHandler(this.StateChanged);
+            // 
+            // buttDonate
+            // 
+            this.buttDonate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttDonate.BackColor = System.Drawing.SystemColors.Highlight;
+            this.buttDonate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttDonate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttDonate.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.buttDonate.Location = new System.Drawing.Point(252, 3);
+            this.buttDonate.Name = "buttDonate";
+            this.buttDonate.Size = new System.Drawing.Size(83, 23);
+            this.buttDonate.TabIndex = 7;
+            this.buttDonate.Text = "Donate";
+            this.buttDonate.UseVisualStyleBackColor = false;
+            this.buttDonate.Click += new System.EventHandler(this.ButtDonate_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.label1.Location = new System.Drawing.Point(7, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(169, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Help LineSorter become better!)";
+            // 
             // OptionControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttDonate);
             this.Controls.Add(this.groupLines);
             this.Controls.Add(this.groupUserSort);
             this.Controls.Add(this.groupAutoLoad);
@@ -260,6 +290,7 @@
             this.groupLines.ResumeLayout(false);
             this.groupLines.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -279,5 +310,7 @@
         private System.Windows.Forms.RadioButton checkAsMask;
         private System.Windows.Forms.RadioButton checkAsLine;
         private System.Windows.Forms.RadioButton checkRemove;
+        private System.Windows.Forms.Button buttDonate;
+        private System.Windows.Forms.Label label1;
     }
 }

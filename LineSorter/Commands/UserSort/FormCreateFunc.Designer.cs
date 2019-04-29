@@ -135,7 +135,7 @@
             this.buttCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCancel.Location = new System.Drawing.Point(379, 211);
+            this.buttCancel.Location = new System.Drawing.Point(379, 476);
             this.buttCancel.Name = "buttCancel";
             this.buttCancel.Size = new System.Drawing.Size(121, 23);
             this.buttCancel.TabIndex = 7;
@@ -147,7 +147,7 @@
             // 
             this.buttCompile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttCompile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttCompile.Location = new System.Drawing.Point(252, 211);
+            this.buttCompile.Location = new System.Drawing.Point(252, 476);
             this.buttCompile.Name = "buttCompile";
             this.buttCompile.Size = new System.Drawing.Size(121, 23);
             this.buttCompile.TabIndex = 6;
@@ -161,7 +161,7 @@
             this.panelBack.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.panelBack.Location = new System.Drawing.Point(15, 172);
             this.panelBack.Name = "panelBack";
-            this.panelBack.Size = new System.Drawing.Size(485, 17);
+            this.panelBack.Size = new System.Drawing.Size(485, 282);
             this.panelBack.TabIndex = 11;
             this.panelBack.Click += new System.EventHandler(this.PanelBack_Click);
             // 
@@ -228,7 +228,7 @@
             this.textAfter.Freezed = false;
             this.textAfter.Interval = 1000;
             this.textAfter.KeywordColor = System.Drawing.Color.SteelBlue;
-            this.textAfter.Location = new System.Drawing.Point(15, 189);
+            this.textAfter.Location = new System.Drawing.Point(15, 454);
             this.textAfter.Name = "textAfter";
             this.textAfter.NumericColor = System.Drawing.Color.SpringGreen;
             this.textAfter.ReadOnly = true;
@@ -266,26 +266,28 @@
             this.textMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textMain.AutoHeight = true;
+            this.textMain.AutoHeight = false;
             this.textMain.BackColor = System.Drawing.Color.White;
             this.textMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textMain.ClassColor = System.Drawing.Color.LightSeaGreen;
             this.textMain.CommentColor = System.Drawing.Color.YellowGreen;
-            this.textMain.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.textMain.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textMain.Freezed = false;
             this.textMain.Interval = 1000;
             this.textMain.KeywordColor = System.Drawing.Color.SteelBlue;
             this.textMain.Location = new System.Drawing.Point(35, 172);
-            this.textMain.MaximumSize = new System.Drawing.Size(465, 200);
+            this.textMain.MaximumSize = new System.Drawing.Size(465, 300);
             this.textMain.MinimumSize = new System.Drawing.Size(465, 17);
             this.textMain.Name = "textMain";
             this.textMain.NumericColor = System.Drawing.Color.MediumSeaGreen;
-            this.textMain.Size = new System.Drawing.Size(465, 17);
+            this.textMain.Size = new System.Drawing.Size(465, 282);
             this.textMain.StringColor = System.Drawing.Color.Firebrick;
             this.textMain.TabIndex = 5;
             this.textMain.TabSize = 4;
-            this.textMain.Text = "";
+            this.textMain.Text = "// Your code here :)";
             this.textMain.TextChanged += new System.EventHandler(this.TextMain_TextChanged);
+            this.textMain.Enter += new System.EventHandler(this.TextMain_Enter);
+            this.textMain.Leave += new System.EventHandler(this.TextMain_Leave);
             // 
             // FormCreateFunc
             // 
@@ -293,7 +295,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttCancel;
-            this.ClientSize = new System.Drawing.Size(512, 246);
+            this.ClientSize = new System.Drawing.Size(512, 511);
             this.Controls.Add(this.labelEmpty);
             this.Controls.Add(this.comboLines);
             this.Controls.Add(this.textName);
