@@ -72,16 +72,29 @@ namespace LineSorter.Helpers
                 default:
                     break;
             }
-            // `((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Text =  value` is really slow!
-            // So I use this small 'hack':
-            // Saving current clipboard state:
-            IDataObject obj = Clipboard.GetDataObject();
-            // Loading text to clipboard:
-            Clipboard.SetText(string.Join(newlineStr, Selections) + (WasNewline ? newlineStr : string.Empty));
-            // Pasting text from clipboard (and formatting it):
-            dte.ExecuteCommand("Edit.Paste");
-            // Now we return everything as it was)
-            Clipboard.SetDataObject(obj);
+
+            string text = string.Join(newlineStr, Selections) + (WasNewline ? newlineStr : string.Empty);
+            try
+            {
+                // `((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Text = value` is really slow!
+                // So I use this small 'hack':
+                // Saving current clipboard state:
+                IDataObject obj = Clipboard.GetDataObject();
+
+                // Loading text to clipboard:
+                Clipboard.SetDataObject(new DataObject(DataFormats.UnicodeText, text), true);
+                //Clipboard.SetText(text); -- Throws when system clipboard's blocked by another process
+
+                // Pasting text from clipboard (and formatting it):
+                dte.ExecuteCommand("Edit.Paste");
+                // Now we return everything as it was)
+                Clipboard.SetDataObject(obj);
+            } 
+            catch
+            {
+                ((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Text = text;
+            }
+
         }
         public static void ReplaceSelection(this IEnumerable<string> Selections, IServiceProvider ServiceProvider, int[] EmptyLinePositions, NewlineType NewlineType, bool WasNewLine)
         {
