@@ -1,4 +1,5 @@
 using System;
+using KE.VSIX;
 using System.Threading;
 using LineSorter.Helpers;
 using LineSorter.Commands;
@@ -24,9 +25,8 @@ namespace LineSorter
     public sealed class VSPackage : AsyncPackage
     {
         #region Var
-        public static string Path { get; }
         public static SortsLoader Loader { get; }
-        public static string DllLocation { get; }
+        public static PathContainer PathData { get; }
         public static VSPackage Instance { get; private set; }
         public static Guid Guid { get; } = new Guid(PackageGuidString);
         public const string PackageGuidString = "7fb18e2a-1a51-4dbb-b676-a3514e44823d";
@@ -35,10 +35,7 @@ namespace LineSorter
         #region Init
         static VSPackage()
         {
-            DllLocation = new Uri(typeof(VSPackage).Assembly.CodeBase, UriKind.Absolute).LocalPath;
-            Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LineSorter\\");
-            if (!System.IO.Directory.Exists(Path))
-                System.IO.Directory.CreateDirectory(Path);
+            PathData = PackageHelper.Initialize<VSPackage>(true);
             Loader = new SortsLoader();
         }
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using KE.VSIX.Commands;
 using LineSorter.Export;
 using LineSorter.Helpers;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace LineSorter.Commands
 {
+    [CommandID("e9f69e2b-6313-4c2b-9765-1ddd6439d519", 0x0105)]
     internal sealed class CommandUserSort : BaseCommand<CommandUserSort>
     {
         #region Var
@@ -21,9 +23,7 @@ namespace LineSorter.Commands
         #region Init
         static CommandUserSort()
         {
-            CommandID = 0x0105;
-            CommandSet = new Guid("e9f69e2b-6313-4c2b-9765-1ddd6439d519");
-            SavePath = Path.Combine(VSPackage.Path, "UserSort\\");
+            SavePath = VSPackage.PathData.MapPath("UserSort");
             ExportFile = new Uri(typeof(IUserSort).Assembly.CodeBase, UriKind.Absolute).LocalPath;
             if (!Directory.Exists(SavePath))
                 Directory.CreateDirectory(SavePath);

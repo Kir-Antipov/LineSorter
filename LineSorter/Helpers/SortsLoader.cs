@@ -18,7 +18,7 @@ namespace LineSorter.Helpers
         #endregion
 
         #region Init
-        static SortsLoader() => SettingsPath = Path.Combine(VSPackage.Path, "settings.xml");
+        static SortsLoader() => SettingsPath = VSPackage.PathData.MapPath("settings.xml");
 
         public SortsLoader()
         {

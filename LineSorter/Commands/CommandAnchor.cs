@@ -1,19 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using KE.VSIX.Commands;
 using LineSorter.Export;
 using Microsoft.VisualStudio.Shell;
 
 namespace LineSorter.Commands
 {
+    [CommandID("e9f69e2b-6313-4c2b-9765-1ddd6439d519", 0x0106)]
     internal sealed class CommandAnchor : BaseCommand<CommandAnchor>
     {
         #region Init
-        static CommandAnchor()
-        {
-            CommandID = 0x0106;
-            CommandSet = new Guid("e9f69e2b-6313-4c2b-9765-1ddd6439d519");
-        }
-
         protected override void AfterInit()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
