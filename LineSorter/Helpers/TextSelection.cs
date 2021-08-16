@@ -1,4 +1,5 @@
 ﻿using EnvDTE;
+using EnvDTE80;
 using System;
 using Microsoft;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace LineSorter.Helpers
             string newlineStr = NewlineType.AsString();
             if (Action == EmptyLineAction.DependsOnSettings)
                 Action = VSPackage.Loader.Settings.EmptyLineAction;
-            DTE dte = ServiceProvider?.GetService(typeof(DTE)) as DTE;            
+            DTE2 dte = ServiceProvider?.GetService(typeof(DTE)) as DTE2;            
             if (dte is null) return;
             switch (Action)
             {

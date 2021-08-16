@@ -3,8 +3,8 @@ using System.Reflection;
 using Microsoft.VisualStudio.Shell;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("4.8.0")]
-[assembly: AssemblyFileVersion("4.8.0")]
+[assembly: AssemblyVersion("5.0.0")]
+[assembly: AssemblyFileVersion("5.0.0")]
 [assembly: NeutralResourcesLanguage("en", UltimateResourceFallbackLocation.Satellite)]
 
 [assembly: ProvideCodeBase]
