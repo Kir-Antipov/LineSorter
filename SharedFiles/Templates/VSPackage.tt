@@ -1,5 +1,9 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
 using System;
-using KE.VSIX;
 using System.Threading;
 using LineSorter.Helpers;
 using LineSorter.Commands;
@@ -20,14 +24,13 @@ namespace LineSorter
     [ProvideAutoLoad(VSConstants.UICONTEXT.CodeWindow_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionOpening_string, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.FirstLaunchSetup_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideAutoLoad(VSConstants.UICONTEXT.BackgroundProjectLoad_string, PackageAutoLoadFlags.BackgroundLoad)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     public sealed class VSPackage : AsyncPackage
     {
         #region Var
+        public static string Path { get; }
         public static SortsLoader Loader { get; }
-        public static PathContainer PathData { get; }
-        public static VSPackage Instance { get; private set; }
+        public static string DllLocation { get; }
         public static Guid Guid { get; } = new Guid(PackageGuidString);
         public const string PackageGuidString = "7fb18e2a-1a51-4dbb-b676-a3514e44823d";
         #endregion
@@ -35,7 +38,10 @@ namespace LineSorter
         #region Init
         static VSPackage()
         {
-            PathData = PackageHelper.Initialize<VSPackage>(true);
+            DllLocation = new Uri(typeof(VSPackage).Assembly.CodeBase, UriKind.Absolute).LocalPath;
+            Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LineSorter\\");
+            if (!System.IO.Directory.Exists(Path))
+                System.IO.Directory.CreateDirectory(Path);
             Loader = new SortsLoader();
         }
         #endregion
@@ -44,17 +50,11 @@ namespace LineSorter
         protected override async Task InitializeAsync(CancellationToken CancellationToken, IProgress<ServiceProgressData> Progress)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(CancellationToken);
-
-            await CommandLengthSort.InitializeAsync(this);
-            await CommandLengthSortDesc.InitializeAsync(this);
-            await CommandAlphSort.InitializeAsync(this);
-            await CommandAlphSortDesc.InitializeAsync(this);
-            await CommandRandomSort.InitializeAsync(this);
-            await CommandUserSort.InitializeAsync(this);
-            await CommandAnchor.InitializeAsync(this);
-
-            Instance = this;
+<# for (int i = 0; i < commands.Length; i++) { #>
+            await <#= commands[i].Name #>.InitializeAsync(this);
+<# } #>
         }
         #endregion
     }
 }
+<# SaveOutput("..\\VSPackage.cs"); #>
