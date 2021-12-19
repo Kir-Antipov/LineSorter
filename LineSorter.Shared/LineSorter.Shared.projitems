@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5c46ed96-d96c-45f2-911b-c3ab84e9b8df</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>LineSorter.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandAlphSort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandAlphSortDesc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandAnchor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandLengthSort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandLengthSortDesc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandRandomSort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\CommandUserSort.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormCreateFunc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormCreateFunc.Designer.cs">
+      <DependentUpon>FormCreateFunc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormTestFunc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormTestFunc.Designer.cs">
+      <DependentUpon>FormTestFunc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\UserSort\LangBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AssemblyLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NewlineType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ResourceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\SortsLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\TextSelection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Options\OptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\OptionControl.Designer.cs">
+      <DependentUpon>OptionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\OptionPageGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Options\Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormCreateFunc.resx">
+      <DependentUpon>FormCreateFunc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Commands\UserSort\FormTestFunc.resx">
+      <DependentUpon>FormTestFunc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Options\OptionControl.resx">
+      <DependentUpon>OptionControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

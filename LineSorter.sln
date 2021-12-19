@@ -1,26 +1,53 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineSorter", "LineSorter\LineSorter.csproj", "{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineSorter.VS2022", "LineSorter.VS2022\LineSorter.VS2022.csproj", "{EA344126-2ECB-4201-9495-FB5BB384B25D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineSorter.Export", "LineSorter.Export\LineSorter.Export.csproj", "{7C6268A5-9C8A-4251-B26B-236432D3CD44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineSorter.PreVS2022", "LineSorter.PreVS2022\LineSorter.PreVS2022.csproj", "{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "LineSorter.Shared", "LineSorter.Shared\LineSorter.Shared.shproj", "{5C46ED96-D96C-45F2-911B-C3AB84E9B8DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineSorter.Export", "LineSorter.Export\LineSorter.Export.csproj", "{7C6268A5-9C8A-4251-B26B-236432D3CD44}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		LineSorter.Shared\LineSorter.Shared.projitems*{5c125593-c23e-4adf-adaa-8ced87aa89d4}*SharedItemsImports = 4
+		LineSorter.Shared\LineSorter.Shared.projitems*{5c46ed96-d96c-45f2-911b-c3ab84e9b8df}*SharedItemsImports = 13
+		LineSorter.Shared\LineSorter.Shared.projitems*{ea344126-2ecb-4201-9495-fb5bb384b25d}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Debug|x86.ActiveCfg = Debug|x86
+		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Debug|x86.Build.0 = Debug|x86
 		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Release|x86.ActiveCfg = Release|x86
+		{5C125593-C23E-4ADF-ADAA-8CED87AA89D4}.Release|x86.Build.0 = Release|x86
 		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Debug|x86.Build.0 = Debug|Any CPU
 		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C6268A5-9C8A-4251-B26B-236432D3CD44}.Release|x86.Build.0 = Release|Any CPU
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Debug|x86.ActiveCfg = Debug|x86
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Debug|x86.Build.0 = Debug|x86
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Release|x86.ActiveCfg = Release|x86
+		{EA344126-2ECB-4201-9495-FB5BB384B25D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

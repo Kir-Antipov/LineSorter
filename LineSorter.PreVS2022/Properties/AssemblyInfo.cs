@@ -1,10 +1,10 @@
 ﻿using System.Resources;
 using System.Reflection;
-using Microsoft.VisualStudio.Shell;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.Shell;
 
-[assembly: AssemblyVersion("5.0.0")]
-[assembly: AssemblyFileVersion("5.0.0")]
+[assembly: AssemblyVersion("5.0.1")]
+[assembly: AssemblyFileVersion("5.0.1")]
 [assembly: NeutralResourcesLanguage("en", UltimateResourceFallbackLocation.Satellite)]
 
 [assembly: ProvideCodeBase]
@@ -17,4 +17,3 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("LineSorter extension")]
 
 [assembly: ComVisible(true)]
-
