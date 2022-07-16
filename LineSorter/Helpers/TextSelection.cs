@@ -3,7 +3,6 @@ using EnvDTE80;
 using System;
 using Microsoft;
 using System.Linq;
-using System.Windows;
 using LineSorter.Export;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
@@ -52,7 +51,7 @@ namespace LineSorter.Helpers
             string newlineStr = NewlineType.AsString();
             if (Action == EmptyLineAction.DependsOnSettings)
                 Action = VSPackage.Loader.Settings.EmptyLineAction;
-            DTE2 dte = ServiceProvider?.GetService(typeof(DTE)) as DTE2;            
+            DTE2 dte = ServiceProvider?.GetService(typeof(DTE)) as DTE2;
             if (dte is null) return;
             switch (Action)
             {
@@ -75,27 +74,7 @@ namespace LineSorter.Helpers
             }
 
             string text = string.Join(newlineStr, Selections) + (WasNewline ? newlineStr : string.Empty);
-            try
-            {
-                // `((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Text = value` is really slow!
-                // So I use this small 'hack':
-                // Saving current clipboard state:
-                IDataObject obj = Clipboard.GetDataObject();
-
-                // Loading text to clipboard:
-                Clipboard.SetDataObject(new DataObject(DataFormats.UnicodeText, text), true);
-                //Clipboard.SetText(text); -- Throws when system clipboard's blocked by another process
-
-                // Pasting text from clipboard (and formatting it):
-                dte.ExecuteCommand("Edit.Paste");
-                // Now we return everything as it was)
-                Clipboard.SetDataObject(obj);
-            } 
-            catch
-            {
-                ((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Text = text;
-            }
-
+            ((EnvDTE.TextSelection)dte.ActiveDocument.Selection).Insert(text);
         }
         public static void ReplaceSelection(this IEnumerable<string> Selections, IServiceProvider ServiceProvider, int[] EmptyLinePositions, NewlineType NewlineType, bool WasNewLine)
         {
